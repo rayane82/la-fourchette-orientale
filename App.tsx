@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Testimonials from './components/Testimonials';
 import Menu from './components/Menu';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
@@ -48,7 +49,7 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <About />
-        <Menu />
+        <Testimonials />
         <div className="bg-[#06402B] py-12">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <div className="w-24 h-1 bg-[#D4AF37] mx-auto mb-8"></div>
@@ -57,6 +58,7 @@ const App: React.FC = () => {
             </h2>
           </div>
         </div>
+        <Menu />
         <BookingForm />
       </main>
       <Footer onAdminClick={handleAdminAccess} />

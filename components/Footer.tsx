@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Instagram, Facebook, Phone, Coffee, Lock, Navigation, MessageCircle, Mail } from 'lucide-react';
+import { MapPin, Instagram, Facebook, Phone, Coffee, Navigation, MessageCircle, Mail } from 'lucide-react';
 
 interface FooterProps {
   onAdminClick: () => void;
@@ -111,10 +111,9 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
           
           <button 
             onClick={() => onAdminClick()}
-            className="opacity-20 hover:opacity-100 transition-all duration-300 absolute bottom-0 right-0 p-6 cursor-pointer z-20 group"
-            title="Accès Gérant"
+            className="opacity-[0.05] hover:opacity-40 transition-all duration-1000 absolute bottom-0 right-0 p-4 cursor-default hover:cursor-pointer z-20 group"
           >
-            <Lock size={18} className="text-white group-hover:text-[#D4AF37] transition-colors" />
+            <span className="text-[7px] uppercase tracking-[0.5em] text-white">Espace Gérant</span>
           </button>
         </div>
       </div>

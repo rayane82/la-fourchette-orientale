@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
             onClick={() => scrollTo('reservation')}
             className="group relative px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full overflow-hidden transition-all shadow-2xl min-w-[240px]"
           >
-            <span className="relative z-10 tracking-widest uppercase text-sm">FAIRE UNE DEMANDE</span>
+            <span className="relative z-10 tracking-widest uppercase text-sm">DEMANDER UNE TABLE</span>
             <div className="absolute inset-0 bg-[#06402B] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           </button>
           <button 

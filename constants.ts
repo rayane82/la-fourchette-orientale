@@ -5,7 +5,7 @@ export const COLORS = {
   forestGreen: '#06402B',
   gold: '#D4AF37',
   stone: '#F9F6F2',
-  deepTerracotta: '#5D2E17',
+  deepTerracotta: '#2D140D',
   darkBottleGreen: '#042D1E',
 };
 

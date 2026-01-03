@@ -7,7 +7,7 @@ const About: React.FC = () => {
     <section id="about" className="py-32 bg-[#FDFBF7] relative overflow-hidden">
       {/* Decorative Brand Accents */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent"></div>
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#5D2E17]/5 rounded-full blur-[120px]"></div>
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#2D140D]/5 rounded-full blur-[120px]"></div>
       <div className="absolute inset-0 bg-zellige opacity-5 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -17,7 +17,7 @@ const About: React.FC = () => {
             <div className="absolute -top-6 -left-6 w-full h-full border border-[#D4AF37]/20 rounded-[2.5rem] z-0 transition-transform duration-700 group-hover:-translate-x-1 group-hover:-translate-y-1"></div>
             <div className="absolute -bottom-6 -right-6 w-full h-full border border-[#06402B]/10 rounded-[2.5rem] z-0 transition-transform duration-700 group-hover:translate-x-1 group-hover:translate-y-1"></div>
             
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(93,46,23,0.15)] aspect-[4/5] bg-white p-3">
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(45,20,13,0.15)] aspect-[4/5] bg-white p-3">
               <img 
                 src="https://i.postimg.cc/HszjRSHg/images-(2).png" 
                 alt="Intérieur traditionnel marocain" 
@@ -49,17 +49,17 @@ const About: React.FC = () => {
               </span>
               <h2 className="text-5xl md:text-7xl font-serif font-bold text-[#06402B] leading-[1.1]">
                 L’Art de l’Accueil <br/>
-                <span className="text-[#5D2E17] italic font-normal opacity-90">Traditionnel</span>
+                <span className="text-[#2D140D] italic font-normal opacity-90">Traditionnel</span>
               </h2>
               <div className="flex gap-2 mt-8">
                 <div className="w-20 h-1.5 bg-[#D4AF37] rounded-full"></div>
-                <div className="w-8 h-1.5 bg-[#5D2E17] rounded-full"></div>
+                <div className="w-8 h-1.5 bg-[#2D140D] rounded-full"></div>
               </div>
             </div>
             
             <div className="space-y-6">
               <p className="text-[#06402B] text-2xl leading-relaxed font-serif italic opacity-90">
-                "Plus qu'un restaurant, <span className="text-[#5D2E17]">une demeure</span>."
+                "Plus qu'un restaurant, <span className="text-[#2D140D]">une demeure</span>."
               </p>
               <p className="text-stone-600 text-lg leading-relaxed font-light">
                 Situé à Oujda, <span className="font-bold text-[#06402B]">La Fourchette Orientale</span> vous accueille dans un cadre où l’on s’assoit comme chez soi. Notre espace révèle le riche patrimoine et l’héritage précieux de notre pays.
@@ -68,7 +68,7 @@ const About: React.FC = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               <div className="flex items-start gap-5 group">
-                <div className="p-4 bg-white rounded-2xl text-[#D4AF37] shadow-sm border border-stone-100 group-hover:bg-[#5D2E17] group-hover:text-white transition-all duration-300">
+                <div className="p-4 bg-white rounded-2xl text-[#D4AF37] shadow-sm border border-stone-100 group-hover:bg-[#2D140D] group-hover:text-white transition-all duration-300">
                   <Home size={28} />
                 </div>
                 <div>
@@ -77,7 +77,7 @@ const About: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-start gap-5 group">
-                <div className="p-4 bg-white rounded-2xl text-[#D4AF37] shadow-sm border border-stone-100 group-hover:bg-[#5D2E17] group-hover:text-white transition-all duration-300">
+                <div className="p-4 bg-white rounded-2xl text-[#D4AF37] shadow-sm border border-stone-100 group-hover:bg-[#2D140D] group-hover:text-white transition-all duration-300">
                   <Heart size={28} />
                 </div>
                 <div>
@@ -87,7 +87,7 @@ const About: React.FC = () => {
               </div>
             </div>
             
-            {/* Signature Quote Card with Deep Terracotta Border */}
+            {/* Signature Quote Card with Deep Mahogany Border */}
             <div className="relative p-10 bg-[#06402B] rounded-[2.5rem] text-white shadow-2xl overflow-hidden group border-r-8 border-[#D4AF37]">
               <div className="absolute top-0 right-0 p-8 text-white/5 group-hover:scale-110 transition-transform duration-700">
                 <Quote size={80} />

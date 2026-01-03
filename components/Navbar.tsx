@@ -37,25 +37,20 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
     { name: 'Accueil', id: 'accueil' },
     { name: 'À Propos', id: 'about' },
     { name: 'Le Menu', id: 'menu' },
-    { name: 'Demander une table', id: 'reservation' },
   ];
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? 'bg-white shadow-xl py-3' : 'bg-transparent py-6'
+      scrolled 
+        ? 'bg-[#06402B] shadow-[0_10px_30px_rgba(0,0,0,0.3)] py-3' 
+        : 'bg-transparent py-6'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          {/* Logo avec double fonction : Scroll to top et Admin Access au clic */}
+          {/* Logo */}
           <div 
             className="flex-shrink-0 flex items-center gap-4 cursor-pointer group"
-            onClick={(e) => {
-              if (e.detail >= 3) { // Triple clic pour l'admin (secret) ou simple clic si vous préférez
-                onAdminClick();
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <div className="relative">
               <img 
@@ -66,14 +61,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
               <div className="absolute inset-0 rounded-full border border-white/20 animate-ping pointer-events-none"></div>
             </div>
             <div className="flex flex-col">
-              <span className={`text-xl font-serif font-bold tracking-widest leading-none ${
-                scrolled ? 'text-[#06402B]' : 'text-white'
-              }`}>
+              <span className="text-xl font-serif font-bold tracking-widest leading-none text-white">
                 LA FOURCHETTE
               </span>
-              <span className={`text-xs tracking-[0.3em] font-light ${
-                scrolled ? 'text-[#D4AF37]' : 'text-stone-300'
-              }`}>
+              <span className="text-xs tracking-[0.3em] font-light text-[#D4AF37]">
                 ORIENTALE
               </span>
             </div>
@@ -85,22 +76,19 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`text-sm font-bold tracking-widest uppercase transition-all relative group ${
-                    scrolled ? 'text-[#06402B]' : 'text-white'
-                  }`}
+                  className="text-xs font-bold tracking-widest uppercase transition-all relative group text-white"
                 >
                   {link.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all group-hover:w-full"></span>
                 </button>
               ))}
-              {/* Bouton Admin discret dans la Navbar */}
-              <button 
-                onClick={onAdminClick}
-                className={`p-2 rounded-full transition-all hover:bg-[#D4AF37]/20 ${
-                  scrolled ? 'text-[#06402B]/20' : 'text-white/10'
-                }`}
+              
+              {/* Bouton Distinct "Demander une table" */}
+              <button
+                onClick={() => scrollTo('reservation')}
+                className="px-6 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-[#06402B] transition-all shadow-lg active:scale-95"
               >
-                <div className="w-1 h-1 bg-current rounded-full"></div>
+                Demander une table
               </button>
             </div>
           </div>
@@ -108,9 +96,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${
-                scrolled ? 'text-[#06402B] bg-stone-100' : 'text-white bg-white/10'
-              }`}
+              className="p-2 rounded-lg transition-colors text-white bg-white/10"
             >
               {isOpen ? <X /> : <Menu />}
             </button>
@@ -133,11 +119,13 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
               {link.name}
             </button>
           ))}
-          <button 
-            onClick={() => { setIsOpen(false); onAdminClick(); }}
-            className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] opacity-50"
+          
+          {/* Mobile CTA */}
+          <button
+            onClick={() => scrollTo('reservation')}
+            className="px-10 py-5 bg-[#D4AF37] text-white text-sm font-black uppercase tracking-widest rounded-full shadow-2xl"
           >
-            Espace Gérant
+            Demander une table
           </button>
         </div>
       </div>

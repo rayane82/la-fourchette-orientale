@@ -33,10 +33,10 @@ const Menu: React.FC = () => {
   const toggleZoom = () => setIsZoomed(!isZoomed);
 
   return (
-    <section id="menu" className="py-32 bg-[#2D1409] relative overflow-hidden">
+    <section id="menu" className="py-32 bg-[#1A0A05] relative overflow-hidden">
       {/* Subtle Ambient Accents */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[140px]"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/20 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]"></div>
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/40 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]"></div>
       <div className="absolute inset-0 bg-zellige opacity-[0.03] pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -62,7 +62,7 @@ const Menu: React.FC = () => {
                 setShowGallery(true);
                 document.body.style.overflow = 'hidden';
               }}
-              className="flex items-center gap-3 px-8 py-4 bg-[#3D1C10] text-[#D4AF37] rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-white transition-all shadow-2xl group border border-[#D4AF37]/20"
+              className="flex items-center gap-3 px-8 py-4 bg-[#421D12]/20 text-[#D4AF37] rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-white transition-all shadow-2xl group border border-[#D4AF37]/20"
             >
               <ZoomIn size={18} className="group-hover:scale-110 transition-transform" />
               VOIR LE MENU ILLUSTRÉ (HD)

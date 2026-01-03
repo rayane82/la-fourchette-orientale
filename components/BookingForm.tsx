@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Calendar, Users, Phone, User, Clock, CheckCircle2, AlertCircle, MessageCircle, Smartphone } from 'lucide-react';
+import { Calendar, Users, Phone, User, Clock, CheckCircle2, AlertCircle, MessageCircle, Smartphone, Info } from 'lucide-react';
 import { Reservation } from '../types';
 
 const BookingForm: React.FC = () => {
@@ -73,7 +73,7 @@ const BookingForm: React.FC = () => {
         setTimeout(() => {
           setIsSuccess(false);
           setFormData({ name: '', phone: '', guests: 2, date: '', time: '12:00' });
-        }, 10000);
+        }, 15000);
       } catch (err) {
         setIsSubmitting(false);
         setError("Erreur technique. Veuillez nous contacter directement.");
@@ -104,7 +104,11 @@ const BookingForm: React.FC = () => {
               <div className="flex-1 flex flex-col justify-center text-center py-10 animate-fade-in">
                 <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
                 <h4 className="text-2xl font-bold text-[#06402B]">Demande envoyée !</h4>
-                <p className="text-stone-500 mt-4 text-sm italic">Nous traitons votre demande. Une réponse vous sera adressée sous peu.</p>
+                <div className="mt-6 p-6 bg-[#2D140D]/5 rounded-3xl border-2 border-[#D4AF37]/20">
+                  <p className="text-[#06402B] font-bold text-base leading-relaxed">
+                    Merci pour votre confiance. Votre réservation sera validée par <span className="text-[#2D140D] font-black underline decoration-[#D4AF37]">appel téléphonique</span> ou <span className="text-[#2D140D] font-black underline decoration-[#D4AF37]">message WhatsApp</span> dans les plus brefs délais.
+                  </p>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 flex-1">
@@ -132,8 +136,15 @@ const BookingForm: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 ml-4">Couverts</label>
-                    <div className="relative"><Users className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] w-5 h-5"/><select className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none font-medium appearance-none cursor-pointer" value={formData.guests} onChange={e => setFormData({ ...formData, guests: parseInt(e.target.value) })}>{[1,2,3,4,5,6,7,8,10,12].map(n => <option key={n} value={n}>{n} pers.</option>)}</select></div>
+                    <div className="relative"><Users className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] w-5 h-5"/><select className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none font-medium appearance-none cursor-pointer" value={formData.guests} onChange={e => setFormData({ ...formData, guests: parseInt(e.target.value) })}>{[1,2,3,4,5,6,7,8,9,10].map(n => <option key={n} value={n}>{n} pers.</option>)}</select></div>
                   </div>
+                </div>
+
+                <div className="flex items-start gap-4 bg-[#2D140D]/5 p-5 rounded-2xl border border-[#D4AF37]/20 mb-2">
+                  <Info size={20} className="text-[#D4AF37] shrink-0 mt-0.5" />
+                  <p className="text-[12px] font-semibold text-[#2D140D] leading-relaxed">
+                    Note d'excellence : Votre demande sera <span className="font-black text-[#06402B]">validée par appel téléphonique ou message WhatsApp</span> pour garantir un service sur-mesure.
+                  </p>
                 </div>
 
                 <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-[#06402B] text-[#D4AF37] font-black rounded-2xl hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl disabled:opacity-50 uppercase tracking-widest text-xs active:scale-[0.98]">{isSubmitting ? 'ENVOI EN COURS...' : 'ENVOYER MA DEMANDE'}</button>

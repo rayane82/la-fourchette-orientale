@@ -46,9 +46,16 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
+          {/* Logo avec double fonction : Scroll to top et Admin Access au clic */}
           <div 
             className="flex-shrink-0 flex items-center gap-4 cursor-pointer group"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={(e) => {
+              if (e.detail >= 3) { // Triple clic pour l'admin (secret) ou simple clic si vous préférez
+                onAdminClick();
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
           >
             <div className="relative">
               <img 
@@ -86,6 +93,15 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all group-hover:w-full"></span>
                 </button>
               ))}
+              {/* Bouton Admin discret dans la Navbar */}
+              <button 
+                onClick={onAdminClick}
+                className={`p-2 rounded-full transition-all hover:bg-[#D4AF37]/20 ${
+                  scrolled ? 'text-[#06402B]/20' : 'text-white/10'
+                }`}
+              >
+                <div className="w-1 h-1 bg-current rounded-full"></div>
+              </button>
             </div>
           </div>
           
@@ -102,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div className={`fixed inset-0 bg-[#06402B] z-[-1] transition-transform duration-500 ease-in-out md:hidden ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -117,8 +133,12 @@ const Navbar: React.FC<NavbarProps> = ({ onAdminClick }) => {
               {link.name}
             </button>
           ))}
-          <div className="w-20 h-0.5 bg-[#D4AF37]"></div>
-          <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em] opacity-50">L'Art de Recevoir</p>
+          <button 
+            onClick={() => { setIsOpen(false); onAdminClick(); }}
+            className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] opacity-50"
+          >
+            Espace Gérant
+          </button>
         </div>
       </div>
     </nav>

@@ -26,12 +26,13 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 text-center px-4 max-w-5xl">
-        <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-8 tracking-tight opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+        <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tight opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
           S'asseoir comme <span className="text-[#D4AF37] italic">chez soi</span>
         </h1>
         
-        <p className="text-xl md:text-2xl text-stone-200 mb-14 font-light tracking-wide max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-          Découvrez une escale culinaire à Oujda où l’héritage marocain se savoure dans un <span className="text-[#A0522D] font-medium">cadre chaleureux et soigné</span>.
+        {/* Slogan encore plus discret (text-base md:text-lg) */}
+        <p className="text-base md:text-lg text-stone-200 mb-14 font-light tracking-wide max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+          Découvrez une escale culinaire à Oujda où l’héritage marocain se savoure dans un <span className="text-[#D4AF37] font-medium">cadre chaleureux et soigné</span>.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}>
@@ -39,7 +40,7 @@ const Hero: React.FC = () => {
             onClick={() => scrollTo('reservation')}
             className="group relative px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full overflow-hidden transition-all shadow-2xl min-w-[240px]"
           >
-            <span className="relative z-10 tracking-widest uppercase text-sm">RÉSERVER VOTRE TABLE</span>
+            <span className="relative z-10 tracking-widest uppercase text-sm">FAIRE UNE DEMANDE</span>
             <div className="absolute inset-0 bg-[#06402B] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           </button>
           <button 

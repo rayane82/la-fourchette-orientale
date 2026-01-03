@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  LogOut, Check, X, Search, Clock, Users, Phone, User, Trash2, Calendar, ChevronRight, AlertCircle
+  LogOut, Check, Trash2, Search, Calendar, Clock, Users, User, Phone, 
+  ArrowUpDown, CheckCircle, AlertCircle, ChevronRight, Hash
 } from 'lucide-react';
 import { Reservation } from '../types';
 
@@ -12,37 +13,35 @@ interface FourchetteSecureProps {
 const FourchetteSecure: React.FC<FourchetteSecureProps> = ({ onClose }) => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Chargement des données avec auto-refresh
+  // Chargement et synchronisation sans suppression des données existantes
   useEffect(() => {
     const loadData = () => {
       const data = JSON.parse(localStorage.getItem('reservations') || '[]');
       setReservations(data);
     };
     loadData();
+    // Rafraîchissement automatique pour capter les nouvelles demandes en temps réel
     const interval = setInterval(loadData, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // Logique de tri : La visite la plus proche en premier
-  const sortedReservations = useMemo(() => {
-    return [...reservations].sort((a, b) => {
-      const dateTimeA = new Date(`${a.date} ${a.time}`).getTime();
-      const dateTimeB = new Date(`${b.date} ${b.time}`).getTime();
-      return dateTimeA - dateTimeB; // Ascendant : plus proche d'abord
-    });
-  }, [reservations]);
-
-  // Filtrage par recherche
-  const filteredReservations = useMemo(() => {
-    return sortedReservations.filter(r => 
-      r.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      r.phone.includes(searchTerm)
-    );
-  }, [sortedReservations, searchTerm]);
-
-  const pendingList = filteredReservations.filter(r => r.status === 'En attente');
-  const confirmedList = filteredReservations.filter(r => r.status === 'Confirmé');
+  // Logique de Tri Fusionné (Date + Heure) et Filtrage
+  const processedData = useMemo(() => {
+    return reservations
+      .filter(r => 
+        r.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        r.phone.includes(searchTerm)
+      )
+      .sort((a, b) => {
+        // On crée des objets Date complets pour comparer précisément l'instant T de la visite
+        const timeA = new Date(`${a.date}T${a.time.padStart(5, '0')}`).getTime();
+        const timeB = new Date(`${b.date}T${b.time.padStart(5, '0')}`).getTime();
+        
+        return sortOrder === 'asc' ? timeA - timeB : timeB - timeA;
+      });
+  }, [reservations, searchTerm, sortOrder]);
 
   const updateStatus = (id: string, status: 'Confirmé' | 'Annulé' | 'En attente') => {
     const updated = reservations.map(r => r.id === id ? { ...r, status } : r);
@@ -50,206 +49,225 @@ const FourchetteSecure: React.FC<FourchetteSecureProps> = ({ onClose }) => {
     localStorage.setItem('reservations', JSON.stringify(updated));
   };
 
-  const deleteReservation = (id: string) => {
-    if (confirm("⚠️ Attention : Supprimer définitivement cette fiche client ?")) {
+  const deleteRes = (id: string) => {
+    if (confirm("Voulez-vous vraiment supprimer cette fiche client du registre ? Cette action est irréversible.")) {
       const updated = reservations.filter(r => r.id !== id);
       setReservations(updated);
       localStorage.setItem('reservations', JSON.stringify(updated));
     }
   };
 
-  const ClientCard: React.FC<{ res: Reservation; type: 'pending' | 'confirmed' }> = ({ res, type }) => (
-    <div className={`bg-white rounded-[2rem] p-6 border-2 transition-all duration-300 ${
-      type === 'pending' ? 'border-stone-100 shadow-sm hover:shadow-md' : 'border-green-50 opacity-90'
-    }`}>
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <span className="text-sm font-black text-[#D4AF37] tracking-tighter uppercase">Fiche Client</span>
-          <h3 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-            <User size={18} className="text-stone-400" /> {res.name}
-          </h3>
-        </div>
-        <div className="bg-stone-50 px-3 py-1.5 rounded-xl flex items-center gap-2 border border-stone-100">
-          <Users size={16} className="text-[#06402B]" />
-          <span className="font-bold text-sm">{res.guests} pers.</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="bg-[#F9F6F2] p-3 rounded-2xl flex items-center gap-3">
-          <Calendar size={16} className="text-[#D4AF37]" />
-          <div>
-            <p className="text-[10px] uppercase font-bold text-stone-400 leading-none mb-1">Date</p>
-            <p className="text-xs font-bold">{new Date(res.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</p>
-          </div>
-        </div>
-        <div className="bg-[#F9F6F2] p-3 rounded-2xl flex items-center gap-3">
-          <Clock size={16} className="text-[#D4AF37]" />
-          <div>
-            <p className="text-[10px] uppercase font-bold text-stone-400 leading-none mb-1">Heure</p>
-            <p className="text-sm font-black text-[#06402B]">{res.time}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3 mb-6 px-1">
-        <Phone size={14} className="text-green-600" />
-        <span className="text-sm font-bold text-stone-600 tracking-wider">{res.phone}</span>
-      </div>
-
-      <div className="flex gap-2">
-        {type === 'pending' ? (
-          <>
-            <button 
-              onClick={() => updateStatus(res.id, 'Confirmé')}
-              className="flex-1 py-4 bg-[#06402B] text-white rounded-2xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:bg-[#D4AF37] transition-all active:scale-95"
-            >
-              <Check size={18} /> Valider
-            </button>
-            <button 
-              onClick={() => deleteReservation(res.id)}
-              className="px-5 py-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all active:scale-95"
-            >
-              <Trash2 size={18} />
-            </button>
-          </>
-        ) : (
-          <div className="flex justify-between items-center w-full">
-            <span className="text-[10px] font-black uppercase tracking-widest text-green-600 flex items-center gap-2">
-              <Check size={14} /> Demande Validée
-            </span>
-            <button 
-              onClick={() => updateStatus(res.id, 'En attente')}
-              className="text-stone-300 hover:text-[#D4AF37] p-2 transition-colors"
-              title="Rétablir"
-            >
-              <AlertCircle size={18} />
-            </button>
-            <button 
-              onClick={() => deleteReservation(res.id)}
-              className="text-stone-300 hover:text-red-500 p-2 transition-colors"
-            >
-              <Trash2 size={18} />
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  const stats = {
+    total: reservations.length,
+    pending: reservations.filter(r => r.status === 'En attente').length,
+    today: reservations.filter(r => r.date === new Date().toISOString().split('T')[0]).length
+  };
 
   return (
     <div className="fixed inset-0 bg-[#F9FAFB] z-[100] flex flex-col font-sans text-stone-900 overflow-hidden">
-      {/* Header Gérant */}
-      <header className="bg-[#042D1E] text-white px-6 py-4 flex justify-between items-center shadow-lg border-b border-[#D4AF37]/30">
-        <div className="flex items-center gap-4">
-          <div className="relative">
+      {/* Header Premium Gérant */}
+      <header className="bg-[#042D1E] text-white px-8 py-5 flex justify-between items-center shadow-2xl border-b border-[#D4AF37]/30">
+        <div className="flex items-center gap-6">
+          <div className="relative group">
             <img 
               src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" 
-              className="h-12 w-12 rounded-full border-2 border-[#D4AF37]"
+              className="h-14 w-14 rounded-full border-2 border-[#D4AF37] shadow-lg group-hover:scale-105 transition-transform"
               alt="Logo"
             />
             <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-[#042D1E]"></div>
           </div>
           <div>
-            <h1 className="font-serif text-xl font-bold tracking-tight">Console <span className="text-[#D4AF37]">Gérant</span></h1>
-            <p className="text-[8px] uppercase tracking-[0.3em] text-stone-400 font-black">La Fourchette Orientale</p>
+            <h1 className="font-serif text-2xl font-bold tracking-tight uppercase">Registre <span className="text-[#D4AF37]">Central</span></h1>
+            <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-black">Planification des services • Oujda</p>
           </div>
         </div>
-        <button 
-          onClick={onClose}
-          className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-[#D4AF37] text-white rounded-full text-[10px] font-black uppercase tracking-widest transition-all"
-        >
-          <LogOut size={16} /> Quitter
-        </button>
+
+        <div className="flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-10">
+            <div className="flex flex-col items-center">
+              <span className="text-[8px] font-black uppercase text-stone-500 tracking-widest mb-1">En attente</span>
+              <span className="text-xl font-serif font-bold text-blue-400">{stats.pending}</span>
+            </div>
+            <div className="w-px h-8 bg-white/10"></div>
+            <div className="flex flex-col items-center">
+              <span className="text-[8px] font-black uppercase text-stone-500 tracking-widest mb-1">Aujourd'hui</span>
+              <span className="text-xl font-serif font-bold text-[#D4AF37]">{stats.today}</span>
+            </div>
+          </div>
+          <button 
+            onClick={onClose}
+            className="flex items-center gap-3 px-6 py-3.5 bg-white/5 hover:bg-white/10 rounded-full transition-all border border-white/10 active:scale-95 group"
+          >
+            <LogOut size={18} className="text-[#D4AF37] group-hover:rotate-180 transition-transform duration-500" />
+            <span className="text-xs font-black uppercase tracking-widest">Quitter la Console</span>
+          </button>
+        </div>
       </header>
 
-      {/* Barre de Recherche Dynamique */}
-      <div className="p-4 md:p-6 bg-white border-b border-stone-100 flex flex-col md:flex-row gap-4 justify-between items-center">
-        <div className="relative w-full max-w-xl">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={18} />
+      {/* Barre de Contrôle : Recherche et Tri Chronologique */}
+      <div className="bg-white border-b border-stone-200 px-8 py-6 flex flex-col lg:flex-row justify-between items-center gap-6 shadow-sm z-20">
+        <div className="relative w-full max-w-3xl">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-stone-400" size={20} />
           <input 
             type="text" 
-            placeholder="Rechercher un client (Nom ou Tél)..." 
-            className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-[#D4AF37] outline-none transition-all shadow-sm"
+            placeholder="Rechercher par nom, téléphone ou référence..." 
+            className="w-full pl-14 pr-6 py-4 bg-stone-50 border border-stone-200 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-[#D4AF37] outline-none transition-all"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-6">
-          <div className="text-center">
-            <p className="text-[9px] font-black uppercase text-stone-400 tracking-widest">En attente</p>
-            <p className="text-2xl font-serif font-bold text-blue-600 leading-none mt-1">{pendingList.length}</p>
-          </div>
-          <div className="h-8 w-px bg-stone-100"></div>
-          <div className="text-center">
-            <p className="text-[9px] font-black uppercase text-stone-400 tracking-widest">Validées</p>
-            <p className="text-2xl font-serif font-bold text-green-600 leading-none mt-1">{confirmedList.length}</p>
-          </div>
+
+        <div className="flex items-center gap-3 w-full lg:w-auto">
+          <button 
+            onClick={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+            className="flex-1 lg:flex-none flex items-center justify-center gap-4 px-8 py-4 bg-[#06402B] text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-lg hover:bg-[#D4AF37] transition-all"
+          >
+            <ArrowUpDown size={16} className={sortOrder === 'desc' ? 'rotate-180' : ''} />
+            {sortOrder === 'asc' ? 'Visite la plus proche' : 'Visite la plus lointaine'}
+          </button>
         </div>
       </div>
 
-      {/* Colonnes de Gestion Chronologique */}
-      <div className="flex-1 flex flex-col md:flex-row gap-6 p-4 md:p-8 overflow-hidden bg-[#F9FAFB]">
-        
-        {/* Section : NOUVELLES DEMANDES */}
-        <div className="flex-1 flex flex-col min-w-0">
-          <div className="flex items-center gap-3 mb-6 px-2">
-            <div className="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-              <Clock size={18} />
-            </div>
-            <h2 className="text-xl font-serif font-black text-[#042D1E]">Demandes à traiter</h2>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto space-y-5 pr-2 custom-scrollbar">
-            {pendingList.length > 0 ? (
-              pendingList.map(res => <ClientCard key={res.id} res={res} type="pending" />)
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-stone-300 border-2 border-dashed border-stone-200 rounded-[3rem] p-10 text-center bg-white/50">
-                <Calendar size={48} className="opacity-10 mb-4" />
-                <p className="font-serif italic text-lg opacity-40">Tout est à jour pour le moment.</p>
-              </div>
-            )}
-          </div>
+      {/* Registre Principal */}
+      <div className="flex-1 overflow-auto p-4 md:p-8 bg-[#F9FAFB]">
+        <div className="max-w-7xl mx-auto bg-white rounded-[2.5rem] shadow-2xl border border-stone-100 overflow-hidden transition-all duration-500">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-stone-50/80 border-b border-stone-100 backdrop-blur-md">
+                <th className="px-8 py-6 text-[10px] font-black text-stone-400 uppercase tracking-widest">Client & Contact</th>
+                <th className="px-8 py-6 text-[10px] font-black text-stone-400 uppercase tracking-widest">Date & Heure de Visite</th>
+                <th className="px-8 py-6 text-[10px] font-black text-stone-400 uppercase tracking-widest text-center">Couverts</th>
+                <th className="px-8 py-6 text-[10px] font-black text-stone-400 uppercase tracking-widest">Statut</th>
+                <th className="px-8 py-6 text-[10px] font-black text-stone-400 uppercase tracking-widest text-right">Actions Gérant</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-stone-50">
+              {processedData.length > 0 ? processedData.map((res) => (
+                <tr 
+                  key={res.id} 
+                  className={`group transition-all duration-300 ${
+                    res.status === 'Confirmé' ? 'bg-green-50/30' : 'hover:bg-stone-50'
+                  }`}
+                >
+                  {/* Client */}
+                  <td className="px-8 py-7">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center border-2 transition-colors ${
+                        res.status === 'Confirmé' ? 'bg-green-100 border-green-200 text-green-600' : 'bg-stone-100 border-stone-200 text-stone-400'
+                      }`}>
+                        <User size={20} />
+                      </div>
+                      <div>
+                        <p className="font-black text-stone-900 text-base group-hover:text-[#06402B] transition-colors uppercase tracking-tight">{res.name}</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Phone size={12} className="text-[#D4AF37]" />
+                          <p className="text-xs font-bold text-stone-500 tracking-wider">{res.phone}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  {/* Date & Heure Combinées */}
+                  <td className="px-8 py-7">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2 text-stone-900">
+                        <Calendar size={14} className="text-[#D4AF37]" />
+                        <span className="text-sm font-black uppercase">
+                          {new Date(res.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock size={14} className="text-[#06402B]" />
+                        <span className="text-xl font-serif font-black text-[#042D1E]">{res.time}</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  {/* Nombre de personnes */}
+                  <td className="px-8 py-7">
+                    <div className="flex flex-col items-center">
+                      <div className="flex items-center gap-2 px-4 py-2 bg-stone-100 rounded-2xl border border-stone-200 group-hover:bg-[#06402B] group-hover:text-white transition-all">
+                        <Users size={16} />
+                        <span className="text-sm font-black">{res.guests}</span>
+                      </div>
+                      <span className="text-[8px] font-black text-stone-300 uppercase mt-1 tracking-widest">Invités</span>
+                    </div>
+                  </td>
+
+                  {/* Statut visuel */}
+                  <td className="px-8 py-7">
+                    <span className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all ${
+                      res.status === 'Confirmé' 
+                        ? 'bg-green-100 text-green-700 border-green-200' 
+                        : 'bg-blue-50 text-blue-600 border-blue-100 animate-pulse'
+                    }`}>
+                      {res.status === 'Confirmé' ? <CheckCircle size={10} /> : <AlertCircle size={10} />}
+                      {res.status === 'Confirmé' ? 'Demande Validée' : 'Nouvelle Demande'}
+                    </span>
+                  </td>
+
+                  {/* Actions de décision */}
+                  <td className="px-8 py-7">
+                    <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                      {res.status !== 'Confirmé' ? (
+                        <button 
+                          onClick={() => updateStatus(res.id, 'Confirmé')}
+                          className="flex items-center gap-2 px-6 py-3 bg-[#06402B] text-[#D4AF37] rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl hover:bg-[#D4AF37] hover:text-white transition-all active:scale-90"
+                        >
+                          <Check size={16} /> Valider la table
+                        </button>
+                      ) : (
+                        <button 
+                          onClick={() => updateStatus(res.id, 'En attente')}
+                          className="p-3 text-stone-300 hover:text-[#06402B] transition-colors"
+                          title="Rétablir en attente"
+                        >
+                          <ChevronRight size={22} className="rotate-180" />
+                        </button>
+                      )}
+                      <button 
+                        onClick={() => deleteRes(res.id)}
+                        className="p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all active:scale-90 border border-red-100"
+                        title="Annuler & Supprimer"
+                      >
+                        <Trash2 size={20} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              )) : (
+                <tr>
+                  <td colSpan={5} className="px-8 py-40 text-center">
+                    <div className="flex flex-col items-center gap-6 opacity-20 scale-110">
+                      <div className="p-8 bg-stone-100 rounded-full">
+                        <Calendar size={80} strokeWidth={1} />
+                      </div>
+                      <p className="font-serif italic text-3xl text-stone-600">Le registre est actuellement vide.</p>
+                      <p className="text-[10px] font-black uppercase tracking-[0.4em] text-stone-400">En attente de nouvelles demandes clients</p>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-
-        {/* Séparateur Visuel */}
-        <div className="hidden md:flex items-center justify-center">
-          <ChevronRight className="text-stone-200" size={32} strokeWidth={1} />
-        </div>
-
-        {/* Section : PLANNING CONFIRMÉ */}
-        <div className="flex-1 flex flex-col min-w-0">
-          <div className="flex items-center gap-3 mb-6 px-2">
-            <div className="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
-              <Check size={18} />
-            </div>
-            <h2 className="text-xl font-serif font-black text-stone-400">Planning Confirmé</h2>
-          </div>
-
-          <div className="flex-1 overflow-y-auto space-y-5 pr-2 custom-scrollbar opacity-70 hover:opacity-100 transition-opacity">
-            {confirmedList.length > 0 ? (
-              confirmedList.map(res => <ClientCard key={res.id} res={res} type="confirmed" />)
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-stone-200 p-10 text-center border-2 border-dashed border-stone-100 rounded-[3rem]">
-                <Users size={48} className="opacity-10 mb-4" />
-                <p className="font-serif italic text-lg opacity-20">Aucune réservation confirmée.</p>
-              </div>
-            )}
-          </div>
-        </div>
-
       </div>
 
-      {/* Barre de Status Inférieure */}
-      <footer className="bg-white border-t border-stone-200 px-8 py-3 flex justify-between items-center text-[9px] font-black uppercase tracking-[0.3em] text-stone-400">
-        <div className="flex items-center gap-10">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
-            SERVEUR CONNECTÉ
+      {/* Barre de status et informations système */}
+      <footer className="bg-white border-t border-stone-200 px-10 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-[9px] font-black uppercase tracking-[0.3em] text-stone-400">
+        <div className="flex items-center gap-12">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] animate-pulse"></span>
+            SYSTÈME OPÉRATIONNEL EN DIRECT
           </div>
-          <div className="hidden sm:block">MODE : TRI CHRONOLOGIQUE PAR VISITE</div>
+          <div className="hidden md:flex items-center gap-2">
+            <Hash size={10} className="text-[#D4AF37]" />
+            TOTAL : {stats.total} FICHES CLIENTS PRÉSERVÉES
+          </div>
         </div>
-        <div className="text-[#D4AF37]">LA FOURCHETTE ORIENTALE • OUJDA 2025</div>
+        <div className="flex items-center gap-2 text-[#D4AF37]">
+          LA FOURCHETTE ORIENTALE • CONSOLE GÉRANT • OUJDA 2025
+        </div>
       </footer>
     </div>
   );

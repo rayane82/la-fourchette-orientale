@@ -15,14 +15,6 @@ const BookingForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Calcul des limites de dates (Aujourd'hui -> J+7)
-  const today = new Date();
-  const minDate = today.toISOString().split('T')[0];
-  
-  const maxDateObj = new Date();
-  maxDateObj.setDate(today.getDate() + 7);
-  const maxDate = maxDateObj.toISOString().split('T')[0];
-
   // Génération des créneaux de 10h à 17h
   const timeSlots = [];
   for (let hour = 10; hour <= 17; hour++) {
@@ -36,11 +28,6 @@ const BookingForm: React.FC = () => {
     const [year, month, day] = formData.date.split('-').map(Number);
     const selectedDate = new Date(year, month - 1, day);
     const dayOfWeek = selectedDate.getDay(); // 0 est Dimanche
-
-    // Vérification de la plage de 7 jours
-    if (selectedDate < new Date(today.setHours(0,0,0,0)) || selectedDate > maxDateObj) {
-      return "Les réservations sont limitées aux 7 prochains jours.";
-    }
 
     if (dayOfWeek === 0) {
       return "Nous sommes fermés le dimanche. Merci de demander un autre jour.";
@@ -106,7 +93,7 @@ const BookingForm: React.FC = () => {
             <span className="text-[#D4AF37] font-bold tracking-[0.4em] uppercase text-xs mb-4 block">Disponibilités</span>
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 uppercase leading-tight">DEMANDER <br/>UNE <span className="text-[#D4AF37] italic">TABLE</span></h2>
             <p className="text-stone-300 mb-10 text-lg leading-relaxed font-light">
-              Pour garantir une expérience d'exception, nous acceptons les demandes pour les <span className="text-white font-bold">7 prochains jours</span> uniquement.
+              Pour garantir une expérience d'exception, chaque demande est validée manuellement. 
               <span className="block mt-4 text-white font-medium italic">Nous vous recontacterons sous peu.</span>
             </p>
             
@@ -222,13 +209,12 @@ const BookingForm: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2 col-span-2 sm:col-span-1">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 ml-4">Date (Max 7 jours)</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 ml-4">Date souhaitée</label>
                     <div className="relative">
                       <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] w-5 h-5" />
                       <input
                         type="date" required
-                        min={minDate}
-                        max={maxDate}
+                        min={new Date().toISOString().split('T')[0]}
                         className="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-2xl focus:ring-2 focus:ring-[#D4AF37] focus:outline-none transition-all font-medium"
                         value={formData.date}
                         onChange={e => setFormData({ ...formData, date: e.target.value })}

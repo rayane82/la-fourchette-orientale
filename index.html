@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Fourchette Orientale | Gastronomie Traditionnelle Oujda</title>
+    <title>La Fourchette Orientale | L'Art de Recevoir à Oujda</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230B3022'/%3E%3Cpath d='M50 20 L55 40 L75 40 L60 55 L65 75 L50 60 L35 75 L40 55 L25 40 L45 40 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
@@ -45,8 +45,8 @@
         .nav-scrolled {
             background-color: var(--forest-green);
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
         @keyframes fadeInUp { 
@@ -62,30 +62,26 @@
         .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
         .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
 
-        .menu-tab-active { 
-            background-color: var(--gold); 
-            color: white !important; 
-            box-shadow: 0 8px 15px rgba(212, 175, 55, 0.3);
+        .testimonial-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
         }
 
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(15px);
-            touch-action: none; 
-        }
-
-        .contact-card:hover {
-            transform: translateY(-8px);
-            border-bottom-width: 12px;
-        }
-
-        .service-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .service-card:hover {
-            transform: scale(1.05);
-            background-color: var(--forest-green);
-            color: white;
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.3;
         }
 
         .mobile-touch-area {
@@ -95,11 +91,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-        }
-        
-        #close-gallery-btn {
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
         }
     </style>
 <script type="importmap">
@@ -119,396 +110,255 @@
     <!-- NAVIGATION -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex items-center gap-4 cursor-pointer group">
+            <a href="#accueil" class="flex items-center gap-4 cursor-pointer group">
                 <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-12 w-12 md:h-14 md:w-14 rounded-full border-2 border-[#D4AF37] shadow-lg transition-transform group-hover:rotate-6">
                 <div class="flex flex-col text-white">
-                    <span class="text-lg md:text-xl font-serif font-bold tracking-widest leading-none">LA FOURCHETTE</span>
-                    <span class="text-[9px] md:text-[10px] tracking-[0.3em] font-light text-[#D4AF37]">ORIENTALE</span>
+                    <span class="text-lg md:text-xl font-serif font-bold tracking-widest leading-none uppercase">LA FOURCHETTE</span>
+                    <span class="text-[9px] md:text-[10px] tracking-[0.3em] font-light text-[#D4AF37] uppercase">ORIENTALE</span>
                 </div>
-            </div>
-            <div class="hidden md:flex items-center space-x-10">
+            </a>
+            <div class="hidden lg:flex items-center space-x-10">
                 <a href="#accueil" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Accueil</a>
-                <a href="#about" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Tradition</a>
-                <a href="#services" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Services</a>
-                <a href="#menu" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Menu</a>
-                <a href="#contact" class="px-8 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
+                <a href="#patrimoine" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Notre Héritage</a>
+                <a href="#avis" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Vos Avis</a>
+                <a href="#reservation" class="px-8 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
             </div>
-            <button class="md:hidden text-white mobile-touch-area" onclick="toggleMobileMenu()">
+            <button class="lg:hidden text-white mobile-touch-area" onclick="toggleMobileMenu()">
                 <i data-lucide="menu"></i>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0B3022] py-12 flex flex-col items-center space-y-8 shadow-2xl border-t border-white/10 animate-fade-in-up">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0B3022] py-12 flex flex-col items-center space-y-8 shadow-2xl border-t border-white/10">
             <a href="#accueil" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Accueil</a>
-            <a href="#about" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Tradition</a>
-            <a href="#services" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Services</a>
-            <a href="#menu" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Menu</a>
-            <a href="#contact" class="px-10 py-5 bg-[#D4AF37] text-white font-black rounded-full text-sm" onclick="toggleMobileMenu()">Réserver</a>
+            <a href="#patrimoine" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Notre Héritage</a>
+            <a href="#avis" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Vos Avis</a>
+            <a href="#reservation" class="px-10 py-5 bg-[#D4AF37] text-white font-black rounded-full text-sm" onclick="toggleMobileMenu()">Réserver</a>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0 animate-slow-zoom">
-            <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" class="w-full h-full object-cover" alt="Ambiance Authentique">
+            <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0B3022]/95"></div>
         </div>
         <div class="relative z-10 text-center px-4 max-w-4xl animate-fade-in-up">
             <h1 class="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tighter">
                 S'asseoir comme <br><span class="text-[#D4AF37] italic font-normal">chez soi</span>
             </h1>
-            <p class="text-sm md:text-base text-stone-200 mb-12 font-light max-w-xl mx-auto leading-relaxed opacity-80 tracking-wide uppercase">
-                Gastronomie 100% Beldi à Oujda. <br class="hidden md:block"> Le goût authentique de nos racines.
+            <p class="text-sm md:text-lg text-stone-200 mb-12 font-light max-w-2xl mx-auto leading-relaxed tracking-[0.1em] uppercase italic opacity-90">
+                Entre saveurs marocaines généreuses et accueil chaleureux, <br class="hidden md:block"> chaque repas est un véritable voyage gustatif.
             </p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="#contact" class="px-12 py-5 bg-[#D4AF37] text-white font-black rounded-full uppercase text-[10px] shadow-2xl tracking-[0.2em] hover:scale-105 transition-all">Réserver une table</a>
-                <a href="#menu" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-[10px] backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-[0.2em]">La Carte</a>
+                <a href="#reservation" class="px-12 py-5 bg-[#D4AF37] text-white font-black rounded-full uppercase text-[10px] shadow-2xl tracking-[0.2em] hover:scale-105 transition-all">Réserver une table</a>
+                <a href="#patrimoine" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-[10px] backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-[0.2em]">Notre Histoire</a>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="py-32 bg-white relative">
+    <!-- PATRIMOINE SECTION -->
+    <section id="patrimoine" class="py-32 bg-white relative">
         <div class="absolute inset-0 bg-zedge opacity-5"></div>
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div class="relative aspect-[4/5] bg-stone-50 p-4 rounded-[3.5rem] shadow-2xl overflow-hidden group">
-                <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" class="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover:scale-105" alt="Tradition locale">
+                <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" class="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover:scale-105">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20">
+                    <span class="px-8 py-3 bg-white text-[#0B3022] font-serif italic text-lg rounded-full shadow-xl">Le cœur d'Oujda</span>
+                </div>
             </div>
-            <div class="space-y-10 text-center lg:text-left">
-                <span class="inline-block px-8 py-3 bg-[#0B3022]/5 border-2 border-[#D4AF37] text-[#0B3022] text-[10px] font-black uppercase rounded-full tracking-[0.4em]">Héritage d'Oujda</span>
-                <h2 class="text-5xl md:text-7xl font-serif font-bold text-[#0B3022] leading-tight">L’Essence de la <br><span class="text-[#8E3A1F] italic font-normal">Tradition</span></h2>
-                <p class="text-stone-600 text-lg md:text-xl leading-relaxed font-light italic">
-                    Ici, on ne mange pas, on est reçu. Dans la pure tradition oujdie, La Fourchette Orientale perpétue les gestes d'autrefois pour vous offrir un moment de partage vrai, loin des artifices.
-                </p>
-                <div class="p-12 bg-[#0B3022] rounded-[3rem] text-white border-r-[12px] border-[#D4AF37] shadow-2xl italic font-serif text-2xl relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-zedge opacity-5"></div>
-                    <i data-lucide="quote" class="absolute top-4 right-6 text-white/10" size="80"></i>
-                    <p class="relative z-10 leading-relaxed text-center text-white">"La générosité du partage, la sincérité de l'accueil."</p>
+            <div class="space-y-10">
+                <span class="inline-block px-8 py-3 bg-[#0B3022]/5 border-2 border-[#D4AF37] text-[#0B3022] text-[10px] font-black uppercase rounded-full tracking-[0.4em]">Gastronomie & Héritage</span>
+                <h2 class="text-5xl md:text-7xl font-serif font-bold text-[#0B3022] leading-tight">L'âme de la <br><span class="text-[#8E3A1F] italic font-normal">Fourchette Orientale</span></h2>
+                <div class="space-y-6 text-stone-600 text-lg leading-relaxed font-light">
+                    <p>Situé à <span class="text-[#0B3022] font-bold">Oujda</span>, au Maroc, Fourchette Orientale vous accueille dans un cadre où l’on s’assoit comme chez soi, entouré de meubles et de tissus inspirés des salons traditionnels marocains, révélant le riche patrimoine et l’héritage du pays.</p>
+                    <p>Découvrez nos plats traditionnels préparés avec des <span class="text-[#8E3A1F] font-medium">ingrédients frais et de qualité</span>, minutieusement choisis, dans un cadre chaleureux et soigné. Notre équipe passionnée assure un service attentif pour chaque visite, que ce soit en famille, entre amis ou pour un déjeuner d’affaires.</p>
+                </div>
+                <div class="p-10 bg-[#0B3022] rounded-[3rem] text-white border-r-[12px] border-[#D4AF37] shadow-2xl italic font-serif text-2xl relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-zedge opacity-10"></div>
+                    <i data-lucide="quote" class="absolute -top-4 -right-2 text-white/5 group-hover:scale-110 transition-transform" size="120"></i>
+                    <p class="relative z-10 leading-relaxed text-center">"Chaque repas chez Fourchette Orientale est un véritable voyage gustatif."</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="py-24 bg-[#0B3022]/5 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-6xl font-serif font-bold text-[#0B3022]">Nos <span class="text-[#D4AF37] italic">Services</span></h2>
+    <div class="section-divider"></div>
+
+    <!-- AVIS SECTION -->
+    <section id="avis" class="py-32 bg-stone-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-serif font-bold text-[#0B3022]">Vos moments <br><span class="text-[#D4AF37] italic">partagés</span></h2>
                 <div class="w-24 h-1 bg-[#D4AF37] mx-auto mt-6"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
-                        <i data-lucide="shopping-bag" size="40"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Retrait en Resto</h3>
-                    <p class="text-stone-500 text-sm leading-relaxed">Commandez vos plats traditionnels préférés et récupérez-les directement au restaurant.</p>
-                </div>
-                <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
-                        <i data-lucide="truck" size="40"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Livraison à domicile</h3>
-                    <p class="text-stone-500 text-sm leading-relaxed">La tradition s'invite chez vous. Nous livrons partout à Oujda avec soin et rapidité.</p>
-                </div>
-                <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
-                        <i data-lucide="utensils" size="40"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Sur Place</h3>
-                    <p class="text-stone-500 text-sm leading-relaxed">Vivez l'expérience complète dans notre salon traditionnel au cœur d'Oujda.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MENU SECTION -->
-    <section id="menu" class="py-32 bg-[#140804] text-white relative">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-5xl md:text-8xl font-serif font-bold mb-16">Notre <span class="text-[#D4AF37] italic">Carte</span></h2>
             
-            <div class="flex flex-wrap justify-center gap-4 mb-20" id="menu-categories">
-                <!-- JS Inject -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Sama Zabini -->
+                <div class="testimonial-card">
+                    <div>
+                        <div class="flex text-[#D4AF37] mb-6">
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed mb-8">"Restaurant magnifique !! J’ai adoré chaque plat que j’ai mangé mais les brochettes de viande j’en rêve encore dans mon sommeil 😍😍 la serveuse était géniale, propreté irréprochable et l’ambiance très cosy !! En plus c’est un trop beau restaurant, la déco est bien faite . Bref je regrette pas et j’étais choquée que les prix soient aussi bas."</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t pt-6">
+                        <div class="w-12 h-12 bg-[#0B3022] rounded-full flex items-center justify-center text-white font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-[#0B3022]">Sama Zabini</h4>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-widest">Il y a 4 mois</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-16 text-left" id="menu-items-grid">
-                <!-- JS Inject -->
-            </div>
+                <!-- Sylvie F -->
+                <div class="testimonial-card">
+                    <div>
+                        <div class="flex text-[#D4AF37] mb-6">
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed mb-8">"Très bon déjeuner dans ce restaurant qui propose des plats traditionnels mais aussi des burgers. Service impeccable sans chichi, petit amuse-bouche, plats savoureux."</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t pt-6">
+                        <div class="w-12 h-12 bg-[#D4AF37] rounded-full flex items-center justify-center text-white font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-[#0B3022]">Sylvie F</h4>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-widest">Il y a un mois</span>
+                        </div>
+                    </div>
+                </div>
 
-            <button onclick="openMenuGallery()" class="mt-24 px-16 py-6 border border-[#D4AF37]/50 text-[#D4AF37] rounded-full font-black text-[10px] uppercase tracking-[0.5em] hover:bg-[#D4AF37] hover:text-white transition-all shadow-2xl">
-                <i data-lucide="zoom-in" class="inline-block mr-3" size="18"></i> Voir le Menu Complet HD
-            </button>
+                <!-- Jamil B -->
+                <div class="testimonial-card">
+                    <div>
+                        <div class="flex text-[#D4AF37] mb-6">
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed mb-8">"Un super restaurant pour déguster un bon couscous . Accueil agréable, un service impeccable, une bonne ambiance . A recommander sans réserve"</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t pt-6">
+                        <div class="w-12 h-12 bg-[#8E3A1F] rounded-full flex items-center justify-center text-white font-bold">J</div>
+                        <div>
+                            <h4 class="font-bold text-[#0B3022]">Jamil B</h4>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-widest">Il y a un an</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nara Ghir -->
+                <div class="testimonial-card">
+                    <div>
+                        <div class="flex text-[#D4AF37] mb-6">
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                            <i data-lucide="star" fill="#D4AF37" size="18"></i>
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed mb-8">"Bon restaurant à l'ambiance chaleureuse et au personnel agréable. Le couscous du vendredi était excellent, je le recommande vivement !"</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t pt-6">
+                        <div class="w-12 h-12 bg-[#0B3022] rounded-full flex items-center justify-center text-white font-bold">N</div>
+                        <div>
+                            <h4 class="font-bold text-[#0B3022]">Nara Ghir</h4>
+                            <span class="text-[10px] text-stone-400 uppercase tracking-widest">Il y a 2 semaines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (MODIFIED: NO EMAIL) -->
-    <section id="contact" class="py-32 bg-[#F9F7F2] relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
-            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24 text-center">Réserver une <span class="text-[#D4AF37] italic">table</span></h2>
-
-            <!-- Grid adjusted for 2 centered cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto mb-24">
-                <!-- WhatsApp -->
-                <a href="https://wa.me/212770454031" target="_blank" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
+    <!-- RESERVATION SECTION -->
+    <section id="reservation" class="py-32 bg-[#F9F7F2] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24">Réserver votre <span class="text-[#D4AF37] italic">table</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <a href="https://wa.me/212770454031" target="_blank" class="flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] hover:-translate-y-2 group">
                     <div class="w-24 h-24 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="message-circle" size="48"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">WhatsApp</h3>
-                    <p class="text-stone-400 mb-8 font-medium italic text-sm">0770-454031</p>
-                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Réserver par Message</span>
+                    <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase">WhatsApp</h3>
+                    <p class="text-stone-400 mb-8 font-medium italic">0770-454031</p>
+                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest">Réserver par Message</span>
                 </a>
-
-                <!-- Téléphone -->
-                <a href="tel:+212536680010" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
+                <a href="tel:+212536680010" class="flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] hover:-translate-y-2 group">
                     <div class="w-24 h-24 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#0B3022] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="phone" size="48"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">Téléphone</h3>
-                    <p class="text-stone-400 mb-8 font-medium italic text-sm">0536-680010</p>
-                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors text-center">Appeler Directement</span>
+                    <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase">Téléphone</h3>
+                    <p class="text-stone-400 mb-8 font-medium italic">0536-680010</p>
+                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest">Appeler Maintenant</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER (CONSERVE L'EMAIL ICI) -->
+    <!-- FOOTER -->
     <footer class="bg-[#0B3022] pt-12 pb-6 text-white relative overflow-hidden border-t border-[#D4AF37]/20">
         <div class="absolute inset-0 bg-zedge opacity-5 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-                
-                <!-- Brand & Logo -->
                 <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-16 w-16 rounded-full mb-6 border-2 border-[#D4AF37] shadow-xl">
+                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-16 w-16 rounded-full mb-6 border-2 border-[#D4AF37]">
                     <h3 class="text-lg font-serif font-bold tracking-widest mb-3 uppercase">LA FOURCHETTE ORIENTALE</h3>
-                    <p class="text-stone-400 text-[10px] leading-relaxed max-w-xs uppercase font-medium">
-                        Gastronomie Traditionnelle à Oujda. <br>L'accueil, tout simplement.
-                    </p>
+                    <p class="text-stone-400 text-[10px] leading-relaxed max-w-xs uppercase">Gastronomie Traditionnelle à Oujda. L'accueil, tout simplement.</p>
                 </div>
-
-                <!-- Contact Rapide -->
-                <div class="space-y-4 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left">Contact</h4>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/212770454031" target="_blank" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
-                            <i data-lucide="message-circle" class="text-[#D4AF37]" size="16"></i>
-                            <span class="text-xs font-medium italic">0770-454031</span>
-                        </a>
-                        <a href="tel:+212536680010" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
-                            <i data-lucide="phone" class="text-[#D4AF37]" size="16"></i>
-                            <span class="text-xs font-medium italic">0536-680010</span>
-                        </a>
-                        <a href="mailto:fourchetteorientale.ma@gmail.com" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
-                            <i data-lucide="mail" class="text-[#D4AF37]" size="16"></i>
-                            <span class="text-[10px] font-medium break-all">fourchetteorientale.ma@gmail.com</span>
-                        </a>
+                <div class="space-y-4">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1">Contact</h4>
+                    <div class="space-y-2 text-xs">
+                        <p class="flex items-center gap-3"><i data-lucide="phone" size="14" class="text-[#D4AF37]"></i> 0536-680010</p>
+                        <p class="flex items-center gap-3"><i data-lucide="message-circle" size="14" class="text-[#D4AF37]"></i> 0770-454031</p>
+                        <p class="flex items-center gap-3 break-all"><i data-lucide="mail" size="14" class="text-[#D4AF37]"></i> fourchetteorientale.ma@gmail.com</p>
                     </div>
                 </div>
-
-                <!-- Localisation -->
-                <div class="space-y-4 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left">Lieu</h4>
-                    <div class="space-y-3 w-full">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="map-pin" class="text-[#D4AF37] mt-1 shrink-0" size="16"></i>
-                            <p class="text-stone-300 text-[10px] leading-relaxed uppercase font-medium">
-                                Boulevard Mohammed Derfoufi,<br>
-                                60000 Oujda, Maroc
-                            </p>
-                        </div>
-                        <div class="h-32 w-full rounded-xl overflow-hidden border border-white/10 shadow-lg grayscale-[0.5] hover:grayscale-0 transition-all duration-500">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.935057632164!2d-1.9214227251546938!3d34.681588484239576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd78650061ca7b8d%3A0xc6700e4e9b03f8ac!2sFourchette%20orientale!5e0!3m2!1sfr!2sma!4v1767469064092!5m2!1sfr!2sma" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy">
-                            </iframe>
-                        </div>
+                <div class="space-y-4">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1">Lieu</h4>
+                    <div class="flex items-start gap-3 text-stone-300 text-[10px] uppercase"><i data-lucide="map-pin" size="14" class="text-[#D4AF37]"></i><p>Boulevard Mohammed Derfoufi,<br>60000 Oujda, Maroc</p></div>
+                    <div class="h-24 w-full rounded-xl overflow-hidden border border-white/10 grayscale">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.935057632164!2d-1.9214227251546938!3d34.681588484239576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd78650061ca7b8d%3A0xc6700e4e9b03f8ac!2sFourchette%20orientale!5e0!3m2!1sfr!2sma!4v1767469064092!5m2!1sfr!2sma" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
                     </div>
                 </div>
-
-                <!-- Réseaux & CTA -->
-                <div class="space-y-4 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left uppercase">Suivez-nous</h4>
-                    <div class="flex gap-3 mb-4">
-                        <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
-                            <i data-lucide="instagram" size="18"></i>
-                        </a>
-                        <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
-                            <i data-lucide="facebook" size="18"></i>
-                        </a>
-                    </div>
-                    <div class="flex items-center gap-2 text-stone-300">
-                        <i data-lucide="clock" class="text-[#D4AF37]" size="14"></i>
-                        <span class="text-[9px] uppercase font-bold tracking-widest">10h - 17h (Lun-Sam)</span>
+                <div class="space-y-4">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1">Suivez-nous</h4>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 text-stone-300 hover:bg-[#D4AF37] hover:text-white transition-all"><i data-lucide="instagram" size="18"></i></a>
+                        <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 text-stone-300 hover:bg-[#D4AF37] hover:text-white transition-all"><i data-lucide="facebook" size="18"></i></a>
                     </div>
                 </div>
             </div>
-
             <div class="pt-6 border-t border-white/5 text-center">
-                <p class="text-white/20 text-[8px] uppercase tracking-[0.5em] font-black italic">© 2025 LA FOURCHETTE ORIENTALE - TRADITION OUJDIE</p>
+                <p class="text-white/20 text-[8px] uppercase tracking-[0.5em] italic font-black">© 2025 LA FOURCHETTE ORIENTALE - TRADITION OUJDIE</p>
             </div>
         </div>
     </footer>
 
-    <!-- GALLERY MODAL -->
-    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4" onclick="handleBackdropClick(event)">
-        <button id="close-gallery-btn" class="absolute top-6 right-6 text-white hover:text-[#D4AF37] transition-all transform active:scale-90 z-[120] mobile-touch-area" aria-label="Fermer la galerie">
-            <i data-lucide="x" size="48"></i>
-        </button>
-        
-        <div class="relative w-full max-w-6xl h-[70vh] md:h-[85vh] flex items-center justify-center">
-            <button onclick="prevGalleryImage()" class="absolute left-0 md:left-4 text-white/50 hover:text-[#D4AF37] transition-all transform active:scale-90 z-[110] p-6 mobile-touch-area" aria-label="Précédent">
-                <i data-lucide="chevron-left" size="64"></i>
-            </button>
-            
-            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm border-4 border-white/10" alt="Planche Menu">
-            
-            <button onclick="nextGalleryImage()" class="absolute right-0 md:right-4 text-white/50 hover:text-[#D4AF37] transition-all transform active:scale-90 z-[110] p-6 mobile-touch-area" aria-label="Suivant">
-                <i data-lucide="chevron-right" size="64"></i>
-            </button>
-        </div>
-        <p id="gallery-counter" class="text-[#D4AF37] font-black text-xs mt-12 tracking-[1.5em] uppercase opacity-70 text-center"></p>
-    </div>
-
     <script>
-        const MENU_ITEMS = [
-            { id: '1', category: 'Petit-déjeuner', name: 'Ftour Al-Fourchette', description: 'Msemmen ou Beghrir, Beurre de ferme, Miel pur, Fromage Traditionnel, Oeufs, Jus d\'Orange, Thé ou Café.', price: '55 DH' },
-            { id: '2', category: 'Petit-déjeuner', name: 'Ftour Tradition', description: 'Beurre, Miel, Huile d\'olive extra vierge, Amlou, Fromage, Pain Beldi chaud, Thé.', price: '38 DH' },
-            { id: '3', category: 'Salades & Entrées', name: 'Zaalouk Oujdi', description: 'Aubergines fumées au feu de bois et tomates aux épices ancestrales.', price: '18 DH' },
-            { id: '4', category: 'Salades & Entrées', name: 'Salade Marocaine Pure', description: 'Tomates fraîches, oignons, poivrons verts et persil haché.', price: '18 DH' },
-            { id: '5', category: 'Nos Tajines', name: 'Tajine Viande aux Pruneaux', description: 'Viande de veau fondante, pruneaux caramélisés et amandes croquantes.', price: '65 DH' },
-            { id: '6', category: 'Nos Tajines', name: 'Couscous Traditionnel (Vendredi)', description: 'Semoule fine à la vapeur, sept légumes frais, viande tendre et tfaya maison.', price: '70 DH' },
-            { id: '7', category: 'Grillades', name: 'Kefta Traditionnelle', description: 'Kefta de bœuf hachée minute, grillée au charbon, frites et salade.', price: '45 DH' },
-            { id: '8', category: 'Grillades', name: 'Brochettes de Poulet', description: 'Poulet fermier mariné au safran et herbes fraîches.', price: '42 DH' },
-            { id: '9', category: 'Desserts & Fruits', name: 'Jus d\'Avocat', description: 'Avocat onctueux, mélange généreux de fruits secs et miel.', price: '30 DH' },
-            { id: '10', category: 'Desserts & Fruits', name: 'Salade de Fruits Frais', description: 'Fruits de saison cueillis à maturité, coupés minute.', price: '25 DH' }
-        ];
-
-        const GALLERY_IMAGES = [
-            "https://i.postimg.cc/bJ7FzN9m/2025-10-09-(8).jpg",
-            "https://i.postimg.cc/gjb4CtYh/2025-10-09-(9).jpg",
-            "https://i.postimg.cc/c4sBfnCD/2025-10-09-(10).jpg",
-            "https://i.postimg.cc/jS8TRPnV/2025-10-09-(12).jpg",
-            "https://i.postimg.cc/mkGfmSJ8/2025-10-09-(13).jpg",
-            "https://i.postimg.cc/CL7T4kNs/2025-10-09-(14).jpg",
-            "https://i.postimg.cc/50Bk2WK0/2025-10-09-(15).jpg",
-            "https://i.postimg.cc/k58TTdmW/2025-10-09-(16).jpg",
-            "https://i.postimg.cc/MGQjR6SM/2025-10-09-(17).jpg",
-            "https://i.postimg.cc/R0L42y18/2025-10-09-(19).jpg",
-            "https://i.postimg.cc/SRz5bz0T/2025-10-09-(20).jpg",
-            "https://i.postimg.cc/cCmDS7kG/2025-10-09-(21).jpg",
-            "https://i.postimg.cc/9Fs9fR6B/2025-10-09-(22).jpg",
-            "https://i.postimg.cc/wxGyWRjm/2025-10-09-(23).jpg"
-        ];
-
-        let activeCategory = 'Nos Tajines';
-        let currentImgIndex = 0;
-
         window.addEventListener('load', () => {
             lucide.createIcons();
-            renderCategories();
-            renderMenuItems();
-            checkNavbar();
-
-            const closeBtn = document.getElementById('close-gallery-btn');
-            if(closeBtn) {
-                closeBtn.onclick = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeMenuGallery();
-                };
-            }
+            window.addEventListener('scroll', checkNavbar);
         });
-
-        window.addEventListener('scroll', checkNavbar);
 
         function checkNavbar() {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-scrolled');
-                nav.classList.remove('py-6');
-            } else {
-                nav.classList.remove('nav-scrolled');
-                nav.classList.add('py-6');
-            }
+            if (window.scrollY > 50) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
         }
 
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
-
-        function renderCategories() {
-            const container = document.getElementById('menu-categories');
-            const cats = [...new Set(MENU_ITEMS.map(i => i.category))];
-            container.innerHTML = cats.map(cat => `
-                <button onclick="setCategory('${cat}')" class="px-6 md:px-8 py-3 md:py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] rounded-2xl transition-all border border-white/10 ${activeCategory === cat ? 'menu-tab-active' : 'bg-white/5 text-white/40 hover:bg-white/10'}">
-                    ${cat}
-                </button>
-            `).join('');
-        }
-
-        function renderMenuItems() {
-            const container = document.getElementById('menu-items-grid');
-            const filtered = MENU_ITEMS.filter(i => i.category === activeCategory);
-            container.innerHTML = filtered.map(item => `
-                <div class="group border-b border-stone-200 pb-10 transition-all duration-500">
-                    <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors leading-tight uppercase text-[#0B3022]">${item.name}</h3>
-                        <span class="text-[#D4AF37] font-serif font-bold text-xl md:text-2xl ml-4 shrink-0">${item.price}</span>
-                    </div>
-                    <p class="text-stone-500 italic font-light leading-relaxed text-base md:text-lg">${item.description}</p>
-                </div>
-            `).join('');
-        }
-
-        function setCategory(cat) {
-            activeCategory = cat;
-            renderCategories();
-            renderMenuItems();
-        }
-
-        function openMenuGallery() {
-            document.getElementById('gallery-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            updateGalleryImage();
-        }
-
-        function closeMenuGallery() {
-            const modal = document.getElementById('gallery-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function handleBackdropClick(event) {
-            if (event.target.id === 'gallery-modal') {
-                closeMenuGallery();
-            }
-        }
-
-        function updateGalleryImage() {
-            const img = document.getElementById('gallery-image');
-            img.src = GALLERY_IMAGES[currentImgIndex];
-            document.getElementById('gallery-counter').innerText = `PLANCHE ${currentImgIndex + 1} / ${GALLERY_IMAGES.length}`;
-        }
-
-        function nextGalleryImage() {
-            currentImgIndex = (currentImgIndex + 1) % GALLERY_IMAGES.length;
-            updateGalleryImage();
-        }
-
-        function prevGalleryImage() {
-            currentImgIndex = (currentImgIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-            updateGalleryImage();
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('gallery-modal').classList.contains('hidden')) return;
-            if (e.key === 'ArrowRight') nextGalleryImage();
-            if (e.key === 'ArrowLeft') prevGalleryImage();
-            if (e.key === 'Escape') closeMenuGallery();
-        });
     </script>
 </body>
 </html>

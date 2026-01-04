@@ -1,61 +1,232 @@
-
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Fourchette Orientale | Restaurant Gastronomique Beldi</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #F9F6F2;
-      }
-      h1, h2, h3, h4, .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      .bg-zellige {
-        background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');
-      }
-      @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes slowZoom {
-        from { transform: scale(1); }
-        to { transform: scale(1.1); }
-      }
-      .animate-fade-in-up {
-        animation: fadeInUp 1s ease-out forwards;
-      }
-      .animate-slow-zoom {
-        animation: slowZoom 20s ease-in-out infinite alternate;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #F9F6F2;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #D4AF37;
-        border-radius: 10px;
-      }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F9F6F2;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .bg-zellige {
+            background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        .animate-slow-zoom {
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F9F6F2; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn.active { border-bottom: 2px solid #D4AF37; color: #D4AF37; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
-  }
-}
-</script>
 </head>
-  <body class="bg-stone-50 text-stone-900 overflow-x-hidden">
-    <div id="root"></div>
-  </body>
+<body class="bg-stone-50 text-stone-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-serif font-bold tracking-tighter text-stone-800">LA FOURCHETTE <span class="text-amber-600">ORIENTALE</span></h1>
+            <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-widest">
+                <a href="#hero" class="hover:text-amber-600 transition">Accueil</a>
+                <a href="#menu" class="hover:text-amber-600 transition">Carte</a>
+                <a href="#dashboard" class="hover:text-amber-600 transition">Réservations</a>
+            </div>
+            <button class="bg-stone-900 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-amber-600 transition">RESERVER</button>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo0/1541544741-970221c2131b?auto=format&fit=crop&q=80" 
+                 class="w-full h-full object-cover animate-slow-zoom brightness-50" alt="Gastronomie Marocaine">
+        </div>
+        <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
+            <span class="uppercase tracking-[0.3em] text-sm mb-4 block">L'art de la table Beldi</span>
+            <h2 class="text-6xl md:text-8xl font-serif mb-6">La Fourchette Orientale</h2>
+            <p class="max-w-2xl mx-auto text-lg md:text-xl font-light italic opacity-90">
+                Une immersion sensorielle au cœur des saveurs ancestrales du Maroc.
+            </p>
+            <div class="mt-10">
+                <a href="#menu" class="border border-white px-8 py-3 rounded-full hover:bg-white hover:text-stone-900 transition duration-300">Découvrir la Carte</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-24 bg-zellige">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif mb-4">Notre Carte Signature</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-serif mb-6 border-b pb-2 italic text-amber-800">Les Entrées</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-bold">Pastilla aux Pigeons</h4>
+                                <p class="text-sm text-stone-500 italic">Feuilleté sucré-salé, amandes grillées et cannelle</p>
+                            </div>
+                            <span class="font-serif">18€</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-bold">Zaalouk d'Aubergines</h4>
+                                <p class="text-sm text-stone-500 italic">Caviar d'aubergines fumées, huile d'olive vierge</p>
+                            </div>
+                            <span class="font-serif">12€</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-serif mb-6 border-b pb-2 italic text-amber-800">Les Incontournables</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-bold">Tagine d'Agneau aux Pruneaux</h4>
+                                <p class="text-sm text-stone-500 italic">Agneau fondant, abricots secs, amandes croquantes</p>
+                            </div>
+                            <span class="font-serif">28€</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-bold">Couscous Royal aux Sept Légumes</h4>
+                                <p class="text-sm text-stone-500 italic">Semoule fine travaillée à la main, bouillon parfumé</p>
+                            </div>
+                            <span class="font-serif">32€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="py-20 bg-stone-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row min-h-[500px]">
+                <div class="w-full md:w-64 bg-stone-900 text-stone-400 p-6 flex flex-col">
+                    <div class="mb-10 flex items-center gap-2 text-white">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span class="font-bold uppercase tracking-tighter text-lg">Espace Client</span>
+                    </div>
+                    <nav class="space-y-2">
+                        <button onclick="showTab('res')" class="tab-btn active w-full flex items-center gap-3 p-3 rounded-lg transition hover:bg-stone-800" id="btn-res">
+                            <i data-lucide="calendar"></i> Réservations
+                        </button>
+                        <button onclick="showTab('pref')" class="tab-btn w-full flex items-center gap-3 p-3 rounded-lg transition hover:bg-stone-800" id="btn-pref">
+                            <i data-lucide="user"></i> Préférences
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="flex-1 p-8 md:p-12">
+                    <div id="res" class="tab-content active">
+                        <h3 class="text-2xl font-serif mb-6">Vos Prochaines Réservations</h3>
+                        <div class="border rounded-xl p-6 bg-stone-50 flex justify-between items-center">
+                            <div>
+                                <p class="font-bold">Table pour 4 personnes</p>
+                                <p class="text-sm text-stone-500">Samedi 10 Janvier - 20:30</p>
+                            </div>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Confirmé</span>
+                        </div>
+                    </div>
+
+                    <div id="pref" class="tab-content">
+                        <h3 class="text-2xl font-serif mb-6">Vos Préférences</h3>
+                        <div class="space-y-4">
+                            <label class="block">
+                                <span class="text-sm font-bold uppercase text-stone-500">Allergies / Régime</span>
+                                <input type="text" placeholder="Ex: Sans gluten..." class="mt-1 block w-full border-stone-200 rounded-lg p-2 border">
+                            </label>
+                            <label class="block">
+                                <span class="text-sm font-bold uppercase text-stone-500">Table Favorite</span>
+                                <select class="mt-1 block w-full border-stone-200 rounded-lg p-2 border">
+                                    <option>Près de la fontaine</option>
+                                    <option>En terrasse</option>
+                                    <option>Alcôve discrète</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-900 text-stone-400 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h4 class="text-white font-serif text-xl mb-4">La Fourchette Orientale</h4>
+                <p class="text-sm leading-relaxed">Le raffinement de la gastronomie marocaine traditionnelle, servi dans un cadre d'exception.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-serif text-xl mb-4">Horaires</h4>
+                <p class="text-sm">Mardi - Dimanche : 19h00 - 23h30</p>
+                <p class="text-sm">Fermé le Lundi</p>
+            </div>
+            <div>
+                <h4 class="text-white font-serif text-xl mb-4">Contact</h4>
+                <p class="text-sm">12 Rue des Oliviers, Marrakech</p>
+                <p class="text-sm">+212 5 22 XX XX XX</p>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-stone-800 text-center text-xs uppercase tracking-widest">
+            © 2026 La Fourchette Orientale - Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        // Initialiser les icônes Lucide
+        lucide.createIcons();
+
+        // Gestion simplifiée des onglets du Dashboard
+        function showTab(tabId) {
+            // Cacher tous les contenus
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Désactiver tous les boutons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('text-white');
+                btn.classList.add('text-stone-400');
+            });
+
+            // Afficher le contenu sélectionné
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activer le bouton cliqué
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-stone-400');
+            activeBtn.classList.add('text-white');
+        }
+    </script>
+</body>
 </html>

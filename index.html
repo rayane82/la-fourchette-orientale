@@ -66,10 +66,6 @@
             border-color: transparent !important; 
         }
 
-        #admin-view { display: none; }
-        body.admin-mode #landing-view { display: none; }
-        body.admin-mode #admin-view { display: block; }
-
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: var(--cream); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
@@ -96,7 +92,6 @@
 </head>
 <body class="selection:bg-[#D4AF37] selection:text-white">
 
-    <!-- LANDING VIEW -->
     <div id="landing-view">
         <!-- Navbar -->
         <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
@@ -112,7 +107,7 @@
                     <a href="#accueil" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Accueil</a>
                     <a href="#about" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">À Propos</a>
                     <a href="#menu" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Menu</a>
-                    <a href="#reservation" class="px-6 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
+                    <a href="#contact" class="px-6 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
                 </div>
                 <button class="md:hidden text-white" onclick="toggleMobileMenu()">
                     <i data-lucide="menu"></i>
@@ -123,7 +118,7 @@
                 <a href="#accueil" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">Accueil</a>
                 <a href="#about" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">À Propos</a>
                 <a href="#menu" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">Menu</a>
-                <a href="#reservation" class="px-8 py-4 bg-[#D4AF37] text-white font-black rounded-full" onclick="toggleMobileMenu()">Réserver</a>
+                <a href="#contact" class="px-8 py-4 bg-[#D4AF37] text-white font-black rounded-full" onclick="toggleMobileMenu()">Réserver</a>
             </div>
         </nav>
 
@@ -141,7 +136,7 @@
                     Une escale culinaire à Oujda où l’héritage marocain se savoure dans un cadre chaleureux et soigné.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <a href="#reservation" class="px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full uppercase text-sm shadow-2xl tracking-widest hover:scale-105 transition-all">Réserver une table</a>
+                    <a href="#contact" class="px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full uppercase text-sm shadow-2xl tracking-widest hover:scale-105 transition-all">Demander une table</a>
                     <a href="#menu" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-sm backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-widest">Voir le Menu</a>
                 </div>
             </div>
@@ -199,49 +194,52 @@
             </div>
         </section>
 
-        <!-- Reservation Section -->
-        <section id="reservation" class="py-24 bg-[#042D1E] text-white relative overflow-hidden">
+        <!-- Contact & Reservation Section -->
+        <section id="contact" class="py-24 bg-[#042D1E] text-white relative overflow-hidden">
             <div class="absolute inset-0 bg-zellige opacity-5"></div>
-            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <div class="bg-white text-stone-900 p-10 md:p-14 rounded-[3rem] shadow-2xl border-t-8 border-[#D4AF37]">
-                    <h3 class="text-3xl font-serif font-bold text-[#0B3022] mb-8">Demander une Table</h3>
-                    <form id="reservation-form" onsubmit="handleReservation(event)" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input type="text" id="res-name" placeholder="Votre Nom" required class="w-full p-4 bg-stone-50 border rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none">
-                            <input type="tel" id="res-phone" placeholder="WhatsApp / Téléphone" required class="w-full p-4 bg-stone-50 border rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none">
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <input type="date" id="res-date" required class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
-                            <select id="res-time" class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
-                                <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
-                            </select>
-                            <select id="res-guests" class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
-                                <option value="1">1 pers.</option><option value="2" selected>2 pers.</option><option value="4">4 pers.</option><option value="6">6 pers.</option><option value="8">8 pers.</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full py-5 bg-[#0B3022] text-[#D4AF37] font-black rounded-2xl uppercase tracking-widest shadow-xl hover:bg-[#D4AF37] hover:text-white transition-all">Envoyer la demande</button>
-                    </form>
-                    <div id="reservation-success" class="hidden text-center py-10 animate-fade-in-up">
-                        <i data-lucide="check-circle" class="mx-auto text-green-500 mb-6" size="64"></i>
-                        <h4 class="text-2xl font-bold text-[#0B3022]">Demande Envoyée !</h4>
-                        <p class="mt-4 text-stone-500">Nous reviendrons vers vous rapidement par WhatsApp.</p>
-                        <button onclick="location.reload()" class="mt-8 text-xs font-black uppercase text-[#D4AF37] underline tracking-widest">Faire une autre demande</button>
-                    </div>
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <div class="mb-16 animate-fade-in-up">
+                    <h2 class="text-4xl md:text-7xl font-serif font-bold mb-6">Réserver votre <span class="text-[#D4AF37] italic">Table</span></h2>
+                    <p class="text-stone-300 max-w-2xl mx-auto font-light text-lg">
+                        Pour garantir votre place dans notre demeure, contactez-nous directement par WhatsApp ou par téléphone. Nous serons ravis de vous accueillir.
+                    </p>
                 </div>
-                <div class="flex flex-col justify-center space-y-10">
-                    <h3 class="text-4xl font-serif">Nous Contacter</h3>
-                    <div class="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2.5rem]">
-                        <i data-lucide="message-circle" class="text-[#D4AF37]" size="40"></i>
-                        <div>
-                            <p class="text-[10px] uppercase font-black opacity-50 tracking-widest">WhatsApp Direct</p>
-                            <p class="text-2xl font-bold">0770-454031</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/212770454031" target="_blank" class="flex flex-col items-center p-12 bg-white rounded-[3rem] shadow-2xl group transition-all hover:-translate-y-2 border-b-8 border-[#D4AF37]">
+                        <div class="w-20 h-20 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="message-circle" size="40"></i>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2.5rem]">
-                        <i data-lucide="map-pin" class="text-[#D4AF37]" size="40"></i>
+                        <h3 class="text-2xl font-bold text-[#0B3022] mb-2 uppercase tracking-tighter">Via WhatsApp</h3>
+                        <p class="text-stone-500 mb-6 font-medium">Réponse rapide assurée</p>
+                        <span class="px-8 py-3 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Envoyer un message</span>
+                    </a>
+
+                    <!-- Phone Link -->
+                    <a href="tel:+212536680010" class="flex flex-col items-center p-12 bg-white rounded-[3rem] shadow-2xl group transition-all hover:-translate-y-2 border-b-8 border-[#D4AF37]">
+                        <div class="w-20 h-20 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#0B3022] mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="phone" size="40"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#0B3022] mb-2 uppercase tracking-tighter">Par Téléphone</h3>
+                        <p class="text-stone-500 mb-6 font-medium">Appel direct au restaurant</p>
+                        <span class="px-8 py-3 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Appeler maintenant</span>
+                    </a>
+                </div>
+
+                <div class="mt-20 flex flex-col md:flex-row items-center justify-center gap-12 text-left bg-white/5 p-10 rounded-[3rem] border border-white/10 backdrop-blur-sm">
+                    <div class="flex items-center gap-6">
+                        <i data-lucide="map-pin" class="text-[#D4AF37]" size="32"></i>
                         <div>
                             <p class="text-[10px] uppercase font-black opacity-50 tracking-widest">Adresse</p>
-                            <p class="text-lg">Boulevard Mohammed Derfoufi, Oujda</p>
+                            <p class="text-lg font-medium">Boulevard Mohammed Derfoufi, Oujda</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <i data-lucide="clock" class="text-[#D4AF37]" size="32"></i>
+                        <div>
+                            <p class="text-[10px] uppercase font-black opacity-50 tracking-widest">Horaires</p>
+                            <p class="text-lg font-medium">Lun - Sam : 10:00 - 17:00</p>
                         </div>
                     </div>
                 </div>
@@ -251,45 +249,11 @@
         <!-- Footer -->
         <footer class="bg-[#0B3022] py-20 text-center relative border-t border-[#D4AF37]/20">
             <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-16 w-16 rounded-full mx-auto mb-6 border-2 border-[#D4AF37]">
-            <p class="text-white/40 text-[10px] uppercase tracking-[0.5em] mb-10">© 2025 LA FOURCHETTE ORIENTALE - OUJDA</p>
-            <button onclick="showAdminAuth()" class="opacity-10 hover:opacity-100 transition-opacity text-[8px] uppercase tracking-widest text-white">Console Gérant</button>
+            <p class="text-white/40 text-[10px] uppercase tracking-[0.5em]">© 2025 LA FOURCHETTE ORIENTALE - OUJDA</p>
         </footer>
     </div>
 
-    <!-- ADMIN VIEW -->
-    <div id="admin-view" class="min-h-screen bg-stone-100 p-6 md:p-12">
-        <div class="max-w-6xl mx-auto">
-            <header class="flex justify-between items-center mb-10">
-                <div class="flex items-center gap-6">
-                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-14 w-14 rounded-full border-2 border-[#D4AF37]">
-                    <h1 class="text-3xl font-serif font-bold text-[#0B3022]">Registre Admin</h1>
-                </div>
-                <button onclick="logoutAdmin()" class="px-6 py-3 bg-[#0B3022] text-[#D4AF37] rounded-full font-black text-[10px] uppercase tracking-widest flex items-center gap-2">
-                    <i data-lucide="log-out" size="14"></i> Déconnexion
-                </button>
-            </header>
-
-            <div class="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden">
-                <table class="w-full text-left">
-                    <thead class="bg-stone-50 border-b uppercase text-[10px] font-black text-stone-400">
-                        <tr>
-                            <th class="px-8 py-6">Client</th>
-                            <th class="px-8 py-6">Date & Heure</th>
-                            <th class="px-8 py-6">Pers.</th>
-                            <th class="px-8 py-6 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-tbody" class="divide-y divide-stone-100">
-                        <!-- Admin items par JS -->
-                    </tbody>
-                </table>
-                <div id="admin-empty" class="hidden py-40 text-center text-stone-300 italic">Aucune réservation en attente.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODALS -->
-    <!-- Gallery -->
+    <!-- GALLERY MODAL -->
     <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4">
         <button onclick="closeMenuGallery()" class="absolute top-8 right-8 text-white hover:text-[#D4AF37] transition-colors"><i data-lucide="x" size="48"></i></button>
         <div class="relative w-full max-w-4xl h-[80vh] flex items-center justify-center">
@@ -298,21 +262,6 @@
             <button onclick="nextGalleryImage()" class="absolute right-0 text-white hover:text-[#D4AF37]"><i data-lucide="chevron-right" size="64"></i></button>
         </div>
         <p id="gallery-counter" class="text-[#D4AF37] font-black text-[10px] mt-8 tracking-[0.5em] uppercase"></p>
-    </div>
-
-    <!-- Admin Auth -->
-    <div id="auth-modal" class="hidden fixed inset-0 z-[200] modal-overlay flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-10 relative shadow-2xl">
-            <button onclick="hideAdminAuth()" class="absolute top-6 right-6 text-stone-300"><i data-lucide="x"></i></button>
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#D4AF37]"><i data-lucide="lock" size="32"></i></div>
-                <h3 class="text-2xl font-serif font-bold text-[#0B3022]">Accès Gérant</h3>
-            </div>
-            <form onsubmit="handleAdminLogin(event)" class="space-y-6">
-                <input type="password" id="admin-password" placeholder="Mot de passe" required class="w-full p-4 bg-stone-50 border rounded-2xl text-center font-bold tracking-widest outline-none focus:ring-2 focus:ring-[#D4AF37]">
-                <button type="submit" class="w-full py-5 bg-[#0B3022] text-[#D4AF37] font-black rounded-2xl uppercase tracking-widest text-[10px]">Déverrouiller</button>
-            </form>
-        </div>
     </div>
 
     <!-- SCRIPTS -->
@@ -460,89 +409,6 @@
         function prevGalleryImage() {
             currentImgIndex = (currentImgIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
             updateGalleryImage();
-        }
-
-        // --- RESERVATIONS ---
-        function handleReservation(e) {
-            e.preventDefault();
-            const reservation = {
-                id: Date.now(),
-                name: document.getElementById('res-name').value,
-                phone: document.getElementById('res-phone').value,
-                date: document.getElementById('res-date').value,
-                time: document.getElementById('res-time').value,
-                guests: document.getElementById('res-guests').value,
-                status: 'En attente'
-            };
-
-            const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
-            reservations.push(reservation);
-            localStorage.setItem('reservations', JSON.stringify(reservations));
-
-            document.getElementById('reservation-form').classList.add('hidden');
-            document.getElementById('reservation-success').classList.remove('hidden');
-        }
-
-        // --- ADMIN ---
-        function showAdminAuth() { document.getElementById('auth-modal').classList.remove('hidden'); }
-        function hideAdminAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
-
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            if (document.getElementById('admin-password').value === 'OUJDA2025') {
-                document.body.classList.add('admin-mode');
-                hideAdminAuth();
-                renderAdminDashboard();
-                window.scrollTo(0,0);
-            } else {
-                alert('Code erroné');
-            }
-        }
-
-        function logoutAdmin() {
-            document.body.classList.remove('admin-mode');
-            window.scrollTo(0,0);
-        }
-
-        function renderAdminDashboard() {
-            const tbody = document.getElementById('admin-tbody');
-            const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
-            
-            if (reservations.length === 0) {
-                tbody.innerHTML = '';
-                document.getElementById('admin-empty').classList.remove('hidden');
-                return;
-            }
-
-            document.getElementById('admin-empty').classList.add('hidden');
-            tbody.innerHTML = reservations.sort((a,b) => b.id - a.id).map(res => `
-                <tr class="hover:bg-stone-50 transition-colors">
-                    <td class="px-8 py-6">
-                        <p class="font-bold text-[#0B3022] uppercase tracking-tight">${res.name}</p>
-                        <p class="text-[10px] text-stone-400 font-bold">${res.phone}</p>
-                    </td>
-                    <td class="px-8 py-6">
-                        <p class="text-[10px] font-black text-[#D4AF37] uppercase">${res.date}</p>
-                        <p class="text-lg font-serif font-black">${res.time}</p>
-                    </td>
-                    <td class="px-8 py-6 font-black">${res.guests}</td>
-                    <td class="px-8 py-6 text-right">
-                        <button onclick="deleteReservation(${res.id})" class="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all shadow-sm">
-                            <i data-lucide="trash-2" size="18"></i>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        function deleteReservation(id) {
-            if (confirm('Supprimer cette demande ?')) {
-                let res = JSON.parse(localStorage.getItem('reservations') || []);
-                res = res.filter(r => r.id !== id);
-                localStorage.setItem('reservations', JSON.stringify(res));
-                renderAdminDashboard();
-            }
         }
     </script>
 </body>

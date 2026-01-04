@@ -3,54 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Fourchette Orientale | Gastronomie Beldi Chic</title>
+    <title>La Fourchette Orientale | Gastronomie Beldi Chic Oujda</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2306402B'/%3E%3Cpath d='M50 20 L55 40 L75 40 L60 55 L65 75 L50 60 L35 75 L40 55 L25 40 L45 40 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230B3022'/%3E%3Cpath d='M50 20 L55 40 L75 40 L60 55 L65 75 L50 60 L35 75 L40 55 L25 40 L45 40 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
 
-    <!-- Frameworks & Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
-            --forest-green: #06402B;
+            --forest-green: #0B3022;
             --gold: #D4AF37;
-            --stone: #F9F6F2;
-            --terracotta: #2D140D;
+            --cream: #F9F7F2;
+            --terracotta: #8E3A1F;
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--stone); color: #1c1917; overflow-x: hidden; }
-        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--cream); 
+            color: #1c1917; 
+            overflow-x: hidden; 
+        }
         
-        .bg-zellige { background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png'); }
+        h1, h2, h3, h4, .font-serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        .bg-zellige { 
+            background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png'); 
+        }
         
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .nav-scrolled {
+            background-color: var(--forest-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
+        @keyframes slowZoom { 
+            from { transform: scale(1); } 
+            to { transform: scale(1.1); } 
+        }
+
         .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
         .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
-        .animate-shake { animation: shake 0.4s ease-in-out; }
+
+        .menu-tab-active { 
+            background-color: var(--gold); 
+            color: white !important; 
+            border-color: transparent !important; 
+        }
+
+        #admin-view { display: none; }
+        body.admin-mode #landing-view { display: none; }
+        body.admin-mode #admin-view { display: block; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: var(--cream); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+        }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .menu-tab-active { background-color: var(--gold); color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: transparent !important; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--stone); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
-    <script type="importmap">
+<script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.0.0",
-    "react-dom": "https://esm.sh/react-dom@^19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@^19.0.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@^0.454.0?external=react",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.0",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
@@ -59,7 +95,455 @@
 </script>
 </head>
 <body class="selection:bg-[#D4AF37] selection:text-white">
-    <!-- Élément racine pour le montage de React -->
-    <div id="root"></div>
+
+    <!-- LANDING VIEW -->
+    <div id="landing-view">
+        <!-- Navbar -->
+        <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                <div onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex items-center gap-4 cursor-pointer">
+                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-14 w-14 rounded-full border-2 border-[#D4AF37] shadow-lg">
+                    <div class="flex flex-col">
+                        <span class="text-xl font-serif font-bold tracking-widest text-white leading-none">LA FOURCHETTE</span>
+                        <span class="text-[10px] tracking-[0.3em] font-light text-[#D4AF37]">ORIENTALE</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#accueil" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Accueil</a>
+                    <a href="#about" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">À Propos</a>
+                    <a href="#menu" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Menu</a>
+                    <a href="#reservation" class="px-6 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
+                </div>
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0B3022] py-8 flex flex-col items-center space-y-6 shadow-2xl border-t border-white/10">
+                <a href="#accueil" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">Accueil</a>
+                <a href="#about" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">À Propos</a>
+                <a href="#menu" class="text-white font-serif text-2xl" onclick="toggleMobileMenu()">Menu</a>
+                <a href="#reservation" class="px-8 py-4 bg-[#D4AF37] text-white font-black rounded-full" onclick="toggleMobileMenu()">Réserver</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0 animate-slow-zoom">
+                <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#0B3022]/90"></div>
+            </div>
+            <div class="relative z-10 text-center px-4 max-w-4xl animate-fade-in-up">
+                <h1 class="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tight">
+                    S'asseoir comme <span class="text-[#D4AF37] italic">chez soi</span>
+                </h1>
+                <p class="text-lg text-stone-200 mb-12 font-light max-w-2xl mx-auto">
+                    Une escale culinaire à Oujda où l’héritage marocain se savoure dans un cadre chaleureux et soigné.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#reservation" class="px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full uppercase text-sm shadow-2xl tracking-widest hover:scale-105 transition-all">Réserver une table</a>
+                    <a href="#menu" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-sm backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-widest">Voir le Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-32 bg-white relative">
+            <div class="absolute inset-0 bg-zellige opacity-5"></div>
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="relative aspect-[4/5] bg-stone-50 p-4 rounded-[3rem] shadow-2xl overflow-hidden group">
+                    <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" class="w-full h-full object-cover rounded-[2.5rem] transition-transform duration-1000 group-hover:scale-105">
+                </div>
+                <div class="space-y-8">
+                    <span class="inline-block px-6 py-2 bg-[#0B3022]/5 border-2 border-[#D4AF37] text-[#0B3022] text-[10px] font-black uppercase rounded-full tracking-widest">Notre Histoire</span>
+                    <h2 class="text-5xl md:text-7xl font-serif font-bold text-[#0B3022]">L’Art de l’Accueil <br><span class="text-[#8E3A1F] italic font-normal">Traditionnel</span></h2>
+                    <p class="text-stone-600 text-lg leading-relaxed font-light">
+                        Plus qu'un restaurant, une demeure. Situé à Oujda, La Fourchette Orientale vous accueille dans un cadre où l’on s’assoit comme chez soi. Notre espace révèle le riche patrimoine et l’héritage précieux de notre pays.
+                    </p>
+                    <div class="p-10 bg-[#0B3022] rounded-[2.5rem] text-white border-r-8 border-[#D4AF37] shadow-xl italic font-serif text-2xl relative">
+                        <i data-lucide="quote" class="absolute top-4 right-4 text-white/10" size="64"></i>
+                        "Chaque repas est un véritable voyage au cœur des saveurs marocaines, entre générosité et accueil bienveillant."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="py-32 bg-[#1A0A05] text-white relative">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h2 class="text-5xl md:text-7xl font-serif font-bold mb-16">Le Menu <span class="text-[#D4AF37] italic">Beldi</span></h2>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-16" id="menu-categories">
+                    <!-- Categories par JS -->
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12 text-left" id="menu-items-grid">
+                    <!-- Items par JS -->
+                </div>
+
+                <button onclick="openMenuGallery()" class="mt-20 px-12 py-5 border border-[#D4AF37]/40 text-[#D4AF37] rounded-full font-black text-xs uppercase tracking-[0.3em] hover:bg-[#D4AF37] hover:text-white transition-all shadow-2xl">
+                    <i data-lucide="zoom-in" class="inline-block mr-2" size="18"></i> Voir la Carte Illustrée HD
+                </button>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 bg-[#F9F7F2] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-[#0B3022]">Vos moments <span class="text-[#D4AF37] italic">partagés</span></h2>
+                </div>
+                <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar" id="testimonials-container">
+                    <!-- Témoignages par JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservation Section -->
+        <section id="reservation" class="py-24 bg-[#042D1E] text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-zellige opacity-5"></div>
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="bg-white text-stone-900 p-10 md:p-14 rounded-[3rem] shadow-2xl border-t-8 border-[#D4AF37]">
+                    <h3 class="text-3xl font-serif font-bold text-[#0B3022] mb-8">Demander une Table</h3>
+                    <form id="reservation-form" onsubmit="handleReservation(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" id="res-name" placeholder="Votre Nom" required class="w-full p-4 bg-stone-50 border rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none">
+                            <input type="tel" id="res-phone" placeholder="WhatsApp / Téléphone" required class="w-full p-4 bg-stone-50 border rounded-2xl focus:ring-2 focus:ring-[#D4AF37] outline-none">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <input type="date" id="res-date" required class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
+                            <select id="res-time" class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
+                                <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
+                            </select>
+                            <select id="res-guests" class="w-full p-4 bg-stone-50 border rounded-2xl outline-none">
+                                <option value="1">1 pers.</option><option value="2" selected>2 pers.</option><option value="4">4 pers.</option><option value="6">6 pers.</option><option value="8">8 pers.</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-5 bg-[#0B3022] text-[#D4AF37] font-black rounded-2xl uppercase tracking-widest shadow-xl hover:bg-[#D4AF37] hover:text-white transition-all">Envoyer la demande</button>
+                    </form>
+                    <div id="reservation-success" class="hidden text-center py-10 animate-fade-in-up">
+                        <i data-lucide="check-circle" class="mx-auto text-green-500 mb-6" size="64"></i>
+                        <h4 class="text-2xl font-bold text-[#0B3022]">Demande Envoyée !</h4>
+                        <p class="mt-4 text-stone-500">Nous reviendrons vers vous rapidement par WhatsApp.</p>
+                        <button onclick="location.reload()" class="mt-8 text-xs font-black uppercase text-[#D4AF37] underline tracking-widest">Faire une autre demande</button>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center space-y-10">
+                    <h3 class="text-4xl font-serif">Nous Contacter</h3>
+                    <div class="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2.5rem]">
+                        <i data-lucide="message-circle" class="text-[#D4AF37]" size="40"></i>
+                        <div>
+                            <p class="text-[10px] uppercase font-black opacity-50 tracking-widest">WhatsApp Direct</p>
+                            <p class="text-2xl font-bold">0770-454031</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2.5rem]">
+                        <i data-lucide="map-pin" class="text-[#D4AF37]" size="40"></i>
+                        <div>
+                            <p class="text-[10px] uppercase font-black opacity-50 tracking-widest">Adresse</p>
+                            <p class="text-lg">Boulevard Mohammed Derfoufi, Oujda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#0B3022] py-20 text-center relative border-t border-[#D4AF37]/20">
+            <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-16 w-16 rounded-full mx-auto mb-6 border-2 border-[#D4AF37]">
+            <p class="text-white/40 text-[10px] uppercase tracking-[0.5em] mb-10">© 2025 LA FOURCHETTE ORIENTALE - OUJDA</p>
+            <button onclick="showAdminAuth()" class="opacity-10 hover:opacity-100 transition-opacity text-[8px] uppercase tracking-widest text-white">Console Gérant</button>
+        </footer>
+    </div>
+
+    <!-- ADMIN VIEW -->
+    <div id="admin-view" class="min-h-screen bg-stone-100 p-6 md:p-12">
+        <div class="max-w-6xl mx-auto">
+            <header class="flex justify-between items-center mb-10">
+                <div class="flex items-center gap-6">
+                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-14 w-14 rounded-full border-2 border-[#D4AF37]">
+                    <h1 class="text-3xl font-serif font-bold text-[#0B3022]">Registre Admin</h1>
+                </div>
+                <button onclick="logoutAdmin()" class="px-6 py-3 bg-[#0B3022] text-[#D4AF37] rounded-full font-black text-[10px] uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="log-out" size="14"></i> Déconnexion
+                </button>
+            </header>
+
+            <div class="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-stone-50 border-b uppercase text-[10px] font-black text-stone-400">
+                        <tr>
+                            <th class="px-8 py-6">Client</th>
+                            <th class="px-8 py-6">Date & Heure</th>
+                            <th class="px-8 py-6">Pers.</th>
+                            <th class="px-8 py-6 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-tbody" class="divide-y divide-stone-100">
+                        <!-- Admin items par JS -->
+                    </tbody>
+                </table>
+                <div id="admin-empty" class="hidden py-40 text-center text-stone-300 italic">Aucune réservation en attente.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <!-- Gallery -->
+    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4">
+        <button onclick="closeMenuGallery()" class="absolute top-8 right-8 text-white hover:text-[#D4AF37] transition-colors"><i data-lucide="x" size="48"></i></button>
+        <div class="relative w-full max-w-4xl h-[80vh] flex items-center justify-center">
+            <button onclick="prevGalleryImage()" class="absolute left-0 text-white hover:text-[#D4AF37]"><i data-lucide="chevron-left" size="64"></i></button>
+            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm">
+            <button onclick="nextGalleryImage()" class="absolute right-0 text-white hover:text-[#D4AF37]"><i data-lucide="chevron-right" size="64"></i></button>
+        </div>
+        <p id="gallery-counter" class="text-[#D4AF37] font-black text-[10px] mt-8 tracking-[0.5em] uppercase"></p>
+    </div>
+
+    <!-- Admin Auth -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-[200] modal-overlay flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-10 relative shadow-2xl">
+            <button onclick="hideAdminAuth()" class="absolute top-6 right-6 text-stone-300"><i data-lucide="x"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#D4AF37]"><i data-lucide="lock" size="32"></i></div>
+                <h3 class="text-2xl font-serif font-bold text-[#0B3022]">Accès Gérant</h3>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-6">
+                <input type="password" id="admin-password" placeholder="Mot de passe" required class="w-full p-4 bg-stone-50 border rounded-2xl text-center font-bold tracking-widest outline-none focus:ring-2 focus:ring-[#D4AF37]">
+                <button type="submit" class="w-full py-5 bg-[#0B3022] text-[#D4AF37] font-black rounded-2xl uppercase tracking-widest text-[10px]">Déverrouiller</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- DATA ---
+        const MENU_ITEMS = [
+            { id: '1', category: 'Petit-déjeuner', name: 'Ftour Al-Fourchette', description: 'Msemmen ou Beghrir, Beurre, Miel, Fromage, Oeufs, Jus d\'Orange, Thé ou Café.', price: '55 DH' },
+            { id: '2', category: 'Petit-déjeuner', name: 'Ftour Beldi', description: 'Beurre, Miel, Huile d\'olive, Amlou, Fromage, Pain, Thé.', price: '38 DH' },
+            { id: '3', category: 'Entrées', name: 'Zaalouk', description: 'Aubergines grillées et tomates aux épices traditionnelles.', price: '18 DH' },
+            { id: '4', category: 'Entrées', name: 'Salade Marocaine', description: 'Tomates fraîches, oignons, poivrons et persil haché.', price: '18 DH' },
+            { id: '5', category: 'Plats Beldi', name: 'Tajine de Viande aux Pruneaux', description: 'Viande de veau tendre, pruneaux caramélisés et amandes grillées.', price: '65 DH' },
+            { id: '6', category: 'Plats Beldi', name: 'Couscous Royal (Vendredi)', description: 'Semoule fine, sept légumes de saison, viande sélectionnée et tfaya.', price: '70 DH' },
+            { id: '7', category: 'Grillades', name: 'Assiette Kefta', description: 'Kefta de bœuf grillée au feu de bois, frites maison et salade.', price: '45 DH' },
+            { id: '8', category: 'Grillades', name: 'Brochettes Poulet', description: 'Mariné aux herbes orientales, riz beldi ou frites.', price: '42 DH' },
+            { id: '9', category: 'Desserts & Jus', name: 'Jus d\'Avocat Royal', description: 'Avocat onctueux, mélange de fruits secs, miel et amandes.', price: '30 DH' },
+            { id: '10', category: 'Desserts & Jus', name: 'Salade de Fruits', description: 'Assortiment de fruits de saison frais coupés minute.', price: '25 DH' }
+        ];
+
+        const GALLERY_IMAGES = [
+            "https://i.postimg.cc/bJ7FzN9m/2025-10-09-(8).jpg",
+            "https://i.postimg.cc/gjb4CtYh/2025-10-09-(9).jpg",
+            "https://i.postimg.cc/c4sBfnCD/2025-10-09-(10).jpg",
+            "https://i.postimg.cc/jS8TRPnV/2025-10-09-(12).jpg",
+            "https://i.postimg.cc/mkGfmSJ8/2025-10-09-(13).jpg",
+            "https://i.postimg.cc/CL7T4kNs/2025-10-09-(14).jpg",
+            "https://i.postimg.cc/50Bk2WK0/2025-10-09-(15).jpg",
+            "https://i.postimg.cc/k58TTdmW/2025-10-09-(16).jpg",
+            "https://i.postimg.cc/MGQjR6SM/2025-10-09-(17).jpg",
+            "https://i.postimg.cc/R0L42y18/2025-10-09-(19).jpg",
+            "https://i.postimg.cc/SRz5bz0T/2025-10-09-(20).jpg",
+            "https://i.postimg.cc/cCmDS7kG/2025-10-09-(21).jpg",
+            "https://i.postimg.cc/9Fs9fR6B/2025-10-09-(22).jpg",
+            "https://i.postimg.cc/wxGyWRjm/2025-10-09-(23).jpg"
+        ];
+
+        const TESTIMONIALS = [
+            { name: "Ahmed", date: "Janvier 2025", text: "Accueil incroyable, on se sent vraiment comme chez soi. Le tajine aux pruneaux est à tomber !", rating: 5 },
+            { name: "Lila", date: "Décembre 2024", text: "Une déco Beldi chic magnifique. Propreté impeccable et prix très corrects.", rating: 5 },
+            { name: "Karim", date: "Novembre 2024", text: "Le meilleur couscous d'Oujda le vendredi. Service rapide et avec le sourire.", rating: 5 }
+        ];
+
+        let activeCategory = 'Petit-déjeuner';
+        let currentImgIndex = 0;
+
+        // --- INIT ---
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+            renderCategories();
+            renderMenuItems();
+            renderTestimonials();
+            checkNavbar();
+        });
+
+        window.addEventListener('scroll', checkNavbar);
+
+        function checkNavbar() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('nav-scrolled');
+                nav.classList.add('py-6');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- MENU LOGIC ---
+        function renderCategories() {
+            const container = document.getElementById('menu-categories');
+            const cats = [...new Set(MENU_ITEMS.map(i => i.category))];
+            container.innerHTML = cats.map(cat => `
+                <button onclick="setCategory('${cat}')" class="px-8 py-4 text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all border border-white/5 ${activeCategory === cat ? 'menu-tab-active' : 'bg-white/5 text-white/50 hover:bg-white/10'}">
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function renderMenuItems() {
+            const container = document.getElementById('menu-items-grid');
+            const filtered = MENU_ITEMS.filter(i => i.category === activeCategory);
+            container.innerHTML = filtered.map(item => `
+                <div class="group border-b border-white/10 pb-4">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-2xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors">${item.name}</h3>
+                        <span class="text-[#D4AF37] font-serif font-bold text-xl">${item.price}</span>
+                    </div>
+                    <p class="text-stone-400 italic font-light leading-relaxed">${item.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function setCategory(cat) {
+            activeCategory = cat;
+            renderCategories();
+            renderMenuItems();
+        }
+
+        // --- TESTIMONIALS ---
+        function renderTestimonials() {
+            const container = document.getElementById('testimonials-container');
+            container.innerHTML = TESTIMONIALS.map(t => `
+                <div class="min-w-full md:min-w-[400px] bg-white p-10 rounded-[2.5rem] shadow-xl border border-stone-100 snap-center flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-[#D4AF37] mb-6">
+                            ${Array(t.rating).fill('<i data-lucide="star" fill="currentColor" size="16"></i>').join('')}
+                        </div>
+                        <p class="text-stone-600 italic leading-relaxed mb-8">"${t.text}"</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t pt-6">
+                        <div class="w-10 h-10 rounded-full bg-[#0B3022]/5 flex items-center justify-center font-bold text-[#0B3022]">${t.name[0]}</div>
+                        <div>
+                            <p class="font-bold text-[#0B3022]">${t.name}</p>
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest">${t.date}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // --- GALLERY ---
+        function openMenuGallery() {
+            document.getElementById('gallery-modal').classList.remove('hidden');
+            updateGalleryImage();
+        }
+
+        function closeMenuGallery() {
+            document.getElementById('gallery-modal').classList.add('hidden');
+        }
+
+        function updateGalleryImage() {
+            document.getElementById('gallery-image').src = GALLERY_IMAGES[currentImgIndex];
+            document.getElementById('gallery-counter').innerText = `Page ${currentImgIndex + 1} / ${GALLERY_IMAGES.length}`;
+        }
+
+        function nextGalleryImage() {
+            currentImgIndex = (currentImgIndex + 1) % GALLERY_IMAGES.length;
+            updateGalleryImage();
+        }
+
+        function prevGalleryImage() {
+            currentImgIndex = (currentImgIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+            updateGalleryImage();
+        }
+
+        // --- RESERVATIONS ---
+        function handleReservation(e) {
+            e.preventDefault();
+            const reservation = {
+                id: Date.now(),
+                name: document.getElementById('res-name').value,
+                phone: document.getElementById('res-phone').value,
+                date: document.getElementById('res-date').value,
+                time: document.getElementById('res-time').value,
+                guests: document.getElementById('res-guests').value,
+                status: 'En attente'
+            };
+
+            const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+            reservations.push(reservation);
+            localStorage.setItem('reservations', JSON.stringify(reservations));
+
+            document.getElementById('reservation-form').classList.add('hidden');
+            document.getElementById('reservation-success').classList.remove('hidden');
+        }
+
+        // --- ADMIN ---
+        function showAdminAuth() { document.getElementById('auth-modal').classList.remove('hidden'); }
+        function hideAdminAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            if (document.getElementById('admin-password').value === 'OUJDA2025') {
+                document.body.classList.add('admin-mode');
+                hideAdminAuth();
+                renderAdminDashboard();
+                window.scrollTo(0,0);
+            } else {
+                alert('Code erroné');
+            }
+        }
+
+        function logoutAdmin() {
+            document.body.classList.remove('admin-mode');
+            window.scrollTo(0,0);
+        }
+
+        function renderAdminDashboard() {
+            const tbody = document.getElementById('admin-tbody');
+            const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+            
+            if (reservations.length === 0) {
+                tbody.innerHTML = '';
+                document.getElementById('admin-empty').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('admin-empty').classList.add('hidden');
+            tbody.innerHTML = reservations.sort((a,b) => b.id - a.id).map(res => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-8 py-6">
+                        <p class="font-bold text-[#0B3022] uppercase tracking-tight">${res.name}</p>
+                        <p class="text-[10px] text-stone-400 font-bold">${res.phone}</p>
+                    </td>
+                    <td class="px-8 py-6">
+                        <p class="text-[10px] font-black text-[#D4AF37] uppercase">${res.date}</p>
+                        <p class="text-lg font-serif font-black">${res.time}</p>
+                    </td>
+                    <td class="px-8 py-6 font-black">${res.guests}</td>
+                    <td class="px-8 py-6 text-right">
+                        <button onclick="deleteReservation(${res.id})" class="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all shadow-sm">
+                            <i data-lucide="trash-2" size="18"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function deleteReservation(id) {
+            if (confirm('Supprimer cette demande ?')) {
+                let res = JSON.parse(localStorage.getItem('reservations') || []);
+                res = res.filter(r => r.id !== id);
+                localStorage.setItem('reservations', JSON.stringify(res));
+                renderAdminDashboard();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,7 +1,0 @@
-{
-  "name": "La Fourchette Orientale",
-  "description": "Site web officiel du restaurant La Fourchette Orientale - L'authenticité du beldi chic.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
-}

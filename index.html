@@ -2,21 +2,28 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>La Fourchette Orientale | Restaurant Gastronomique Beldi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Fourchette Orientale | Gastronomie Beldi Chic</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2306402B'/%3E%3Cpath d='M50 20 L55 40 L75 40 L60 55 L65 75 L50 60 L35 75 L40 55 L25 40 L45 40 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
 
-    <!-- Stylesheets & Fonts -->
+    <!-- Frameworks & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #F9F6F2; color: #1c1917; overflow-x: hidden; }
+        :root {
+            --forest-green: #06402B;
+            --gold: #D4AF37;
+            --stone: #F9F6F2;
+            --terracotta: #2D140D;
+        }
+
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--stone); color: #1c1917; overflow-x: hidden; }
         h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+        
         .bg-zellige { background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png'); }
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -27,24 +34,23 @@
         .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
         .animate-shake { animation: shake 0.4s ease-in-out; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F9F6F2; }
-        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
-        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
+        .menu-tab-active { background-color: var(--gold); color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: transparent !important; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--stone); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
-
     <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@19.0.0",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.474.0?external=react",
+    "lucide-react": "https://esm.sh/lucide-react@0.454.0?external=react",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.0",
@@ -53,459 +59,7 @@
 }
 </script>
 </head>
-<body>
+<body class="selection:bg-[#D4AF37] selection:text-white">
     <div id="root"></div>
-
-    <script type="text/babel" data-type="module">
-        import React, { useState, useEffect, useRef, useMemo } from 'react';
-        import ReactDOM from 'react-dom/client';
-        import { 
-            Menu as MenuIcon, X, Lock, Star, Utensils, ZoomIn, 
-            ChevronLeft, ChevronRight, Maximize2, Minimize2,
-            Calendar, Users, Phone, User, Clock, CheckCircle2, 
-            AlertCircle, MessageCircle, Smartphone, Info,
-            MapPin, Instagram, Facebook, Coffee, Navigation, Mail,
-            LogOut, Trash2, Search, ArrowUpDown, CheckCircle, XCircle, Shield,
-            Heart, Quote, Home
-        } from 'lucide-react';
-
-        // --- CONSTANTS ---
-        const COLORS = {
-            forestGreen: '#06402B',
-            gold: '#D4AF37',
-            stone: '#F9F6F2',
-            deepTerracotta: '#2D140D',
-            darkBottleGreen: '#042D1E',
-        };
-
-        const MENU_IMAGES = [
-            "https://i.postimg.cc/bJ7FzN9m/2025-10-09-(8).jpg",
-            "https://i.postimg.cc/gjb4CtYh/2025-10-09-(9).jpg",
-            "https://i.postimg.cc/c4sBfnCD/2025-10-09-(10).jpg",
-            "https://i.postimg.cc/jS8TRPnV/2025-10-09-(12).jpg",
-            "https://i.postimg.cc/mkGfmSJ8/2025-10-09-(13).jpg",
-            "https://i.postimg.cc/CL7T4kNs/2025-10-09-(14).jpg",
-            "https://i.postimg.cc/50Bk2WK0/2025-10-09-(15).jpg",
-            "https://i.postimg.cc/k58TTdmW/2025-10-09-(16).jpg",
-            "https://i.postimg.cc/MGQjR6SM/2025-10-09-(17).jpg",
-            "https://i.postimg.cc/R0L42y18/2025-10-09-(19).jpg",
-            "https://i.postimg.cc/SRz5bz0T/2025-10-09-(20).jpg",
-            "https://i.postimg.cc/cCmDS7kG/2025-10-09-(21).jpg",
-            "https://i.postimg.cc/9Fs9fR6B/2025-10-09-(22).jpg",
-            "https://i.postimg.cc/wxGyWRjm/2025-10-09-(23).jpg"
-        ];
-
-        const MENU_ITEMS = [
-            { id: '1', category: 'Petit-déjeuner', name: 'Ftour Al-Fourchette', description: 'Msemmen ou Beghrir, Beurre, Miel, Fromage, Oeufs au choix, Jus d\'Orange, Thé ou Café.', price: '55 DH' },
-            { id: '2', category: 'Petit-déjeuner', name: 'Ftour Beldi', description: 'Beurre, Miel, Huile d\'olive, Amlou, Fromage, Oeufs, Pain, Thé.', price: '38 DH' },
-            { id: '3', category: 'Entrées', name: 'Zaalouk', description: 'Aubergines grillées et tomates aux épices traditionnelles.', price: '18 DH' },
-            { id: '4', category: 'Entrées', name: 'Salade Marocaine', description: 'Tomates fraîches, oignons, poivrons et persil haché.', price: '18 DH' },
-            { id: '5', category: 'Plats', name: 'Tajine de Viande aux Pruneaux', description: 'Viande de veau tendre, pruneaux caramélisés et amandes grillées.', price: '65 DH' },
-            { id: '6', category: 'Plats', name: 'Couscous Royal (Vendredi)', description: 'Semoule fine, sept légumes de saison, viande sélectionnée et tfaya.', price: '70 DH' },
-            { id: '7', category: 'Fast-food', name: 'Sandwich Mixte', description: 'Kefta, Poulet, Frites maison et Salade fraîche.', price: '35 DH' },
-            { id: '8', category: 'Fast-food', name: 'Panini Poulet', description: 'Poulet mariné, fromage fondu et frites croustillantes.', price: '25 DH' },
-            { id: '9', category: 'Desserts', name: 'Jus d\'Avocat Royal', description: 'Avocat onctueux, mélange de fruits secs, miel et amandes.', price: '30 DH' },
-            { id: '10', category: 'Desserts', name: 'Salade de Fruits', description: 'Assortiment de fruits de saison frais coupés minute.', price: '25 DH' },
-        ];
-
-        const CATEGORIES = ['Petit-déjeuner', 'Entrées', 'Plats', 'Fast-food', 'Desserts'];
-
-        const TESTIMONIALS = [
-            { name: "Ahm Maj", date: "Il y a une semaine", content: "Une expérience irréprochable du début à la fin. Tout est parfaitement maîtrisé, de l’accueil jusqu’au passage en caisse. Le service est professionnel et attentionné, les plats sont savoureux et bien présentés.", rating: 5 },
-            { name: "Sama Zabini", date: "Il y a 4 mois", content: "Restaurant magnifique !! J’ai adoré chaque plat que j’ai mangé mais les brochettes de viande j’en rêve encore dans mon sommeil 😍😍 la serveuse était géniale.", rating: 5 },
-            { name: "Sylvie F", date: "Il y a un mois", content: "Très bon déjeuner dans ce restaurant qui propose des plats traditionnels mais aussi des burgers. Service impeccable sans chichi.", rating: 5 },
-            { name: "Claire NACHER", date: "Il y a 8 mois", content: "Super lieu, nous sommes venus en famille à 7, nous avons été très bien accueillis, servis assez rapidement et les plats étaient très bons !", rating: 5 }
-        ];
-
-        // --- COMPONENTS ---
-
-        const Navbar = ({ onAdminClick }) => {
-            const [isOpen, setIsOpen] = useState(false);
-            const [scrolled, setScrolled] = useState(false);
-
-            useEffect(() => {
-                const handleScroll = () => setScrolled(window.scrollY > 50);
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-
-            const scrollTo = (id) => {
-                setIsOpen(false);
-                const element = document.getElementById(id);
-                if (element) {
-                    window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                }
-            };
-
-            return (
-                <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#06402B] shadow-xl py-3' : 'bg-transparent py-6'}`}>
-                    <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-                        <div className="flex items-center gap-4 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                            <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" alt="Logo" className="h-12 w-12 rounded-full border-2 border-[#D4AF37] shadow-lg" />
-                            <div className="flex flex-col">
-                                <span className="text-lg font-serif font-bold tracking-widest text-white leading-none">LA FOURCHETTE</span>
-                                <span className="text-[10px] tracking-[0.3em] font-light text-[#D4AF37]">ORIENTALE</span>
-                            </div>
-                        </div>
-                        
-                        <div className="hidden md:flex items-center space-x-10">
-                            {['accueil', 'about', 'menu'].map((id) => (
-                                <button key={id} onClick={() => scrollTo(id)} className="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">
-                                    {id === 'accueil' ? 'Accueil' : id === 'about' ? 'À Propos' : 'Le Menu'}
-                                </button>
-                            ))}
-                            <button onClick={() => scrollTo('reservation')} className="px-6 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-[#06402B] transition-all">
-                                Demander une table
-                            </button>
-                        </div>
-                        
-                        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-white bg-white/10 rounded-lg">{isOpen ? <X /> : <MenuIcon />}</button>
-                    </div>
-
-                    {isOpen && (
-                        <div className="fixed inset-0 bg-[#06402B] flex flex-col items-center justify-center space-y-8 md:hidden z-[100]">
-                            <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white"><X size={32}/></button>
-                            {['accueil', 'about', 'menu'].map((id) => (
-                                <button key={id} onClick={() => scrollTo(id)} className="text-3xl font-serif text-white">{id === 'accueil' ? 'Accueil' : id === 'about' ? 'À Propos' : 'Le Menu'}</button>
-                            ))}
-                            <button onClick={() => scrollTo('reservation')} className="px-10 py-5 bg-[#D4AF37] text-white font-black rounded-full uppercase text-sm tracking-widest">Demander une table</button>
-                        </div>
-                    )}
-                </nav>
-            );
-        };
-
-        const Hero = () => (
-            <section id="accueil" className="relative h-screen flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 z-0 animate-slow-zoom">
-                    <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" alt="Hero" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#06402B]/90"></div>
-                </div>
-                <div className="relative z-10 text-center px-4 max-w-5xl">
-                    <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-6 animate-fade-in-up">
-                        S'asseoir comme <span className="text-[#D4AF37] italic">chez soi</span>
-                    </h1>
-                    <p className="text-lg text-stone-200 mb-12 font-light max-w-2xl mx-auto animate-fade-in-up">Découvrez une escale culinaire à Oujda où l’héritage marocain se savoure dans un cadre chaleureux.</p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up">
-                        <button onClick={() => document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' })} className="px-12 py-5 bg-[#D4AF37] text-white font-bold rounded-full uppercase tracking-widest text-sm shadow-xl">Demander une table</button>
-                        <button onClick={() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })} className="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase tracking-widest text-sm backdrop-blur-md">Découvrir le menu</button>
-                    </div>
-                </div>
-            </section>
-        );
-
-        const About = () => (
-            <section id="about" className="py-32 bg-[#FDFBF7] relative">
-                <div className="absolute inset-0 bg-zellige opacity-5 pointer-events-none"></div>
-                <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-                    <div className="relative aspect-[4/5] bg-white p-4 rounded-[3rem] shadow-2xl">
-                        <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" alt="Tradition" className="w-full h-full object-cover rounded-[2.5rem]" />
-                        <div className="absolute -bottom-6 -right-6 bg-[#06402B] p-6 rounded-2xl text-white shadow-xl hidden md:block">
-                            <Star className="text-[#D4AF37] mb-2" fill="#D4AF37" />
-                            <p className="text-xs font-black uppercase tracking-widest">Excellence Beldi</p>
-                        </div>
-                    </div>
-                    <div className="space-y-8">
-                        <span className="inline-block px-6 py-2 bg-[#06402B]/5 border-2 border-[#D4AF37] text-[#06402B] text-[10px] font-black uppercase tracking-widest rounded-full">Notre Philosophie</span>
-                        <h2 className="text-5xl md:text-7xl font-serif font-bold text-[#06402B]">L’Art de l’Accueil <br/><span className="text-[#2D140D] italic">Traditionnel</span></h2>
-                        <p className="text-stone-600 leading-relaxed text-lg">Plus qu'un restaurant, une demeure. Situé à Oujda, La Fourchette Orientale vous accueille dans un cadre où l’on s’assoit comme chez soi.</p>
-                        <div className="p-10 bg-[#06402B] rounded-[2.5rem] text-white border-r-8 border-[#D4AF37] shadow-2xl relative overflow-hidden">
-                            <Quote className="absolute top-4 right-4 text-white/10" size={64}/>
-                            <p className="italic font-serif text-2xl relative z-10">"Chaque repas est un véritable voyage au cœur des saveurs marocaines."</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-
-        const Menu = () => {
-            const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
-            const [showGallery, setShowGallery] = useState(false);
-            const [currentImgIndex, setCurrentImgIndex] = useState(0);
-
-            const filteredItems = MENU_ITEMS.filter(item => item.category === activeCategory);
-
-            return (
-                <section id="menu" className="py-32 bg-[#1A0A05] text-white relative">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <div className="text-center mb-20">
-                            <h2 className="text-5xl md:text-7xl font-serif font-bold mb-8">Le Menu <span className="text-[#D4AF37] italic">Beldi</span></h2>
-                            <button onClick={() => setShowGallery(true)} className="flex items-center gap-3 mx-auto px-8 py-4 bg-[#421D12]/20 text-[#D4AF37] border border-[#D4AF37]/20 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-white transition-all">
-                                <ZoomIn size={16}/> VOIR LE MENU EN HD
-                            </button>
-                        </div>
-
-                        <div className="flex flex-wrap justify-center gap-4 mb-20">
-                            {CATEGORIES.map(cat => (
-                                <button key={cat} onClick={() => setActiveCategory(cat)} className={`px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${activeCategory === cat ? 'bg-[#D4AF37] text-white shadow-xl' : 'bg-white/5 text-white/50 hover:bg-white/10'}`}>
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
-                            {filteredItems.map(item => (
-                                <div key={item.id} className="flex flex-col group">
-                                    <div className="flex justify-between items-baseline mb-2 border-b border-white/10 pb-2">
-                                        <h3 className="text-2xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors">{item.name}</h3>
-                                        <span className="text-[#D4AF37] font-serif font-bold text-xl">{item.price}</span>
-                                    </div>
-                                    <p className="text-stone-400 italic font-light">{item.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {showGallery && (
-                        <div className="fixed inset-0 z-[100] bg-black/98 flex items-center justify-center p-4">
-                            <button onClick={() => setShowGallery(false)} className="absolute top-6 right-6 text-white p-2 bg-white/10 rounded-full"><X size={32}/></button>
-                            <img src={MENU_IMAGES[currentImgIndex]} className="max-h-[85vh] rounded-lg shadow-2xl border border-white/10" />
-                            <div className="absolute bottom-10 flex gap-6">
-                                <button onClick={() => setCurrentImgIndex((currentImgIndex - 1 + MENU_IMAGES.length) % MENU_IMAGES.length)} className="p-4 bg-[#D4AF37] rounded-full text-white"><ChevronLeft/></button>
-                                <button onClick={() => setCurrentImgIndex((currentImgIndex + 1) % MENU_IMAGES.length)} className="p-4 bg-[#D4AF37] rounded-full text-white"><ChevronRight/></button>
-                            </div>
-                        </div>
-                    )}
-                </section>
-            );
-        };
-
-        const BookingForm = () => {
-            const [formData, setFormData] = useState({ name: '', phone: '', guests: 2, date: '', time: '12:00' });
-            const [isSuccess, setIsSuccess] = useState(false);
-
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                const existing = JSON.parse(localStorage.getItem('reservations') || '[]');
-                const newRes = { id: Date.now().toString(), ...formData, status: 'En attente', createdAt: new Date().toISOString() };
-                localStorage.setItem('reservations', JSON.stringify([...existing, newRes]));
-                setIsSuccess(true);
-                setTimeout(() => { setIsSuccess(false); setFormData({ name: '', phone: '', guests: 2, date: '', time: '12:00' }); }, 5000);
-            };
-
-            return (
-                <section id="reservation" className="py-24 bg-[#042D1E] text-white">
-                    <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        <div className="bg-white text-stone-900 p-10 rounded-[3rem] shadow-2xl border-t-8 border-[#D4AF37]">
-                            <h3 className="text-3xl font-serif font-bold text-[#06402B] mb-8">Demander une Table</h3>
-                            {isSuccess ? (
-                                <div className="text-center py-10 animate-fade-in">
-                                    <CheckCircle2 size={64} className="text-green-500 mx-auto mb-4" />
-                                    <h4 className="text-2xl font-bold">Demande envoyée !</h4>
-                                    <p className="mt-4 text-stone-500">Nous reviendrons vers vous très bientôt.</p>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="relative">
-                                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37]" size={20}/>
-                                            <input required type="text" placeholder="Votre Nom" className="w-full pl-12 pr-4 py-4 bg-stone-50 rounded-2xl border border-stone-100 outline-none focus:ring-2 focus:ring-[#D4AF37]" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-                                        </div>
-                                        <div className="relative">
-                                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37]" size={20}/>
-                                            <input required type="tel" placeholder="Téléphone / WhatsApp" className="w-full pl-12 pr-4 py-4 bg-stone-50 rounded-2xl border border-stone-100 outline-none focus:ring-2 focus:ring-[#D4AF37]" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                        <input required type="date" className="w-full p-4 bg-stone-50 rounded-2xl border border-stone-100 outline-none focus:ring-2 focus:ring-[#D4AF37]" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
-                                        <select className="w-full p-4 bg-stone-50 rounded-2xl border border-stone-100 outline-none focus:ring-2 focus:ring-[#D4AF37]" value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})}>
-                                            <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
-                                        </select>
-                                        <select className="w-full p-4 bg-stone-50 rounded-2xl border border-stone-100 outline-none focus:ring-2 focus:ring-[#D4AF37]" value={formData.guests} onChange={e => setFormData({...formData, guests: e.target.value})}>
-                                            {[1,2,3,4,5,6,7,8].map(n => <option key={n} value={n}>{n} pers.</option>)}
-                                        </select>
-                                    </div>
-                                    <button type="submit" className="w-full py-5 bg-[#06402B] text-[#D4AF37] font-black rounded-2xl uppercase tracking-widest shadow-xl hover:bg-[#D4AF37] hover:text-white transition-all">Confirmer ma Demande</button>
-                                </form>
-                            )}
-                        </div>
-                        <div className="flex flex-col justify-center space-y-10">
-                            <h3 className="text-4xl font-serif">Contact Immédiat</h3>
-                            <a href="https://wa.me/212770454031" target="_blank" className="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2rem] hover:border-[#D4AF37] transition-all">
-                                <MessageCircle size={40} className="text-[#D4AF37]" />
-                                <div><p className="text-[10px] uppercase font-black opacity-50 tracking-widest">WhatsApp Business</p><p className="text-2xl font-bold">0770-454031</p></div>
-                            </a>
-                            <a href="tel:0536680010" className="flex items-center gap-6 p-8 bg-white/5 border border-white/10 rounded-[2rem] hover:border-[#D4AF37] transition-all">
-                                <Phone size={40} className="text-[#D4AF37]" />
-                                <div><p className="text-[10px] uppercase font-black opacity-50 tracking-widest">Fixe</p><p className="text-2xl font-bold">0536-680010</p></div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        const Testimonials = () => (
-            <section className="py-24 bg-white relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 text-center mb-16">
-                    <h2 className="text-5xl font-serif font-bold text-[#06402B]">Vos moments <span className="text-[#D4AF37] italic">partagés</span></h2>
-                </div>
-                <div className="flex overflow-x-auto gap-8 px-8 pb-10 no-scrollbar">
-                    {TESTIMONIALS.map((t, i) => (
-                        <div key={i} className="min-w-[320px] md:min-w-[450px] p-10 bg-stone-50 rounded-[3rem] shadow-xl border border-stone-100 flex flex-col justify-between">
-                            <p className="italic text-lg text-stone-600 mb-8">"{t.content}"</p>
-                            <div className="flex items-center gap-4 border-t border-stone-200 pt-6">
-                                <div className="w-12 h-12 rounded-full bg-[#06402B] text-[#D4AF37] flex items-center justify-center font-bold text-xl">{t.name[0]}</div>
-                                <div className="text-left">
-                                    <h4 className="font-bold text-[#06402B]">{t.name}</h4>
-                                    <p className="text-[10px] text-stone-400 font-bold uppercase">{t.date}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        );
-
-        const FourchetteSecure = ({ onClose }) => {
-            const [reservations, setReservations] = useState([]);
-            const [searchTerm, setSearchTerm] = useState('');
-
-            useEffect(() => {
-                const data = JSON.parse(localStorage.getItem('reservations') || '[]');
-                setReservations(data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)));
-            }, []);
-
-            const updateStatus = (id, status) => {
-                const updated = reservations.map(r => r.id === id ? { ...r, status } : r);
-                setReservations(updated);
-                localStorage.setItem('reservations', JSON.stringify(updated));
-            };
-
-            const deleteRes = (id) => {
-                if(window.confirm("Supprimer cette fiche définitivement ?")) {
-                    const updated = reservations.filter(r => r.id !== id);
-                    setReservations(updated);
-                    localStorage.setItem('reservations', JSON.stringify(updated));
-                }
-            };
-
-            const filtered = reservations.filter(r => r.name.toLowerCase().includes(searchTerm.toLowerCase()));
-
-            return (
-                <div className="fixed inset-0 bg-[#F9F6F2] z-[200] flex flex-col font-sans">
-                    <header className="bg-[#042D1E] text-white p-6 flex justify-between items-center shadow-2xl">
-                        <div className="flex items-center gap-6">
-                            <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" className="h-14 w-14 rounded-full border-2 border-[#D4AF37]" alt="Admin Logo" />
-                            <div><h1 className="text-2xl font-serif font-bold tracking-tight">Registre Central</h1><p className="text-[9px] uppercase tracking-[0.4em] opacity-40">Console Admin</p></div>
-                        </div>
-                        <button onClick={onClose} className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-[#D4AF37] rounded-full transition-all border border-white/5"><LogOut size={18}/><span className="font-bold text-xs uppercase tracking-widest">Sortir</span></button>
-                    </header>
-
-                    <div className="p-8 flex-1 overflow-auto">
-                        <div className="max-w-6xl mx-auto space-y-8">
-                            <div className="relative">
-                                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-stone-300" size={24} />
-                                <input type="text" placeholder="Rechercher un dossier..." className="w-full pl-16 pr-8 py-5 bg-white border border-stone-100 rounded-[2rem] shadow-xl text-lg outline-none focus:ring-2 focus:ring-[#D4AF37]" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-                            </div>
-
-                            <div className="bg-white rounded-[2rem] shadow-2xl border border-stone-100 overflow-hidden">
-                                <table className="w-full text-left">
-                                    <thead className="bg-stone-50 border-b border-stone-100 text-[10px] font-black uppercase text-stone-400">
-                                        <tr><th className="px-10 py-6">Client</th><th className="px-10 py-6">Date & Couverts</th><th className="px-10 py-6">État</th><th className="px-10 py-6 text-right">Actions</th></tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-stone-50">
-                                        {filtered.map(res => (
-                                            <tr key={res.id} className="hover:bg-stone-50/50 transition-all">
-                                                <td className="px-10 py-7"><div><p className="font-black text-stone-900 uppercase">{res.name}</p><p className="text-xs text-stone-400 font-bold">{res.phone}</p></div></td>
-                                                <td className="px-10 py-7"><div><p className="text-[10px] font-black uppercase text-[#D4AF37]">{res.date}</p><p className="text-xl font-serif font-black">{res.time} • {res.guests}p</p></div></td>
-                                                <td className="px-10 py-7">
-                                                    <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${res.status === 'Confirmé' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
-                                                        {res.status}
-                                                    </span>
-                                                </td>
-                                                <td className="px-10 py-7 text-right">
-                                                    <div className="flex justify-end gap-3">
-                                                        <button onClick={() => updateStatus(res.id, 'Confirmé')} className="p-3 bg-green-50 text-green-600 rounded-xl hover:bg-green-600 hover:text-white transition-all"><CheckCircle size={18}/></button>
-                                                        <button onClick={() => deleteRes(res.id)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all"><Trash2 size={18}/></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                                {filtered.length === 0 && <div className="py-20 text-center text-stone-300 italic">Aucune fiche trouvée.</div>}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const App = () => {
-            const [view, setView] = useState('landing');
-            const [showAuth, setShowAuth] = useState(false);
-            const [pass, setPass] = useState('');
-            const [error, setError] = useState('');
-
-            const handleAuth = (e) => {
-                e.preventDefault();
-                if (pass === 'OUJDA2025') { setView('admin'); setShowAuth(false); setPass(''); setError(''); }
-                else { setError('Mot de passe incorrect'); }
-            };
-
-            if (view === 'admin') return <FourchetteSecure onClose={() => setView('landing')} />;
-
-            return (
-                <div className="min-h-screen">
-                    <Navbar onAdminClick={() => setShowAuth(true)} />
-                    <Hero />
-                    <About />
-                    <div className="bg-[#06402B] py-16 text-center">
-                        <div className="w-20 h-1 bg-[#D4AF37] mx-auto mb-8"></div>
-                        <h2 className="text-3xl font-serif italic text-[#D4AF37]">"La cuisine est le miroir d'une culture, ici elle est sertie d'or."</h2>
-                    </div>
-                    <Menu />
-                    <Testimonials />
-                    <BookingForm />
-                    
-                    <footer className="bg-[#042D1E] text-stone-500 py-20 relative">
-                        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left">
-                            <div>
-                                <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" className="h-20 w-20 rounded-full mx-auto md:mx-0 border-2 border-[#D4AF37] mb-6" alt="Footer Logo" />
-                                <h3 className="text-white text-2xl font-serif font-bold mb-4">La Fourchette Orientale</h3>
-                                <p className="text-sm opacity-60">L'authenticité du beldi à Oujda. Une escale gastronomique d'exception au cœur de l'Oriental.</p>
-                            </div>
-                            <div>
-                                <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-[10px]">Horaires</h4>
-                                <p className="text-sm mb-2">Lun - Sam : 10:00 - 17:00</p>
-                                <p className="text-sm italic opacity-40">Dimanche : Fermé</p>
-                                <h4 className="text-white font-bold mt-10 mb-6 uppercase tracking-widest text-[10px]">Localisation</h4>
-                                <p className="text-sm">Boulevard Mohammed Derfoufi, Oujda</p>
-                            </div>
-                            <div className="flex flex-col items-center md:items-start">
-                                <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-[10px]">Suivez-nous</h4>
-                                <div className="flex gap-4 mb-10">
-                                    <a href="#" className="p-3 bg-white/5 rounded-xl hover:bg-[#D4AF37] transition-all"><Instagram size={20}/></a>
-                                    <a href="#" className="p-3 bg-white/5 rounded-xl hover:bg-[#D4AF37] transition-all"><Facebook size={20}/></a>
-                                </div>
-                                <button onClick={() => setShowAuth(true)} className="opacity-[0.1] hover:opacity-100 transition-all text-[8px] uppercase tracking-[0.5em] text-white">Espace Gérant</button>
-                            </div>
-                        </div>
-                    </footer>
-
-                    {showAuth && (
-                        <div className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
-                            <div className="bg-white w-full max-w-sm rounded-[2.5rem] p-10 relative">
-                                <button onClick={() => setShowAuth(false)} className="absolute top-6 right-6 text-stone-400"><X /></button>
-                                <div className="text-center mb-8">
-                                    <div className="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#D4AF37]"><Lock size={32} /></div>
-                                    <h3 className="text-2xl font-serif font-bold text-[#06402B]">Accès Sécurisé</h3>
-                                </div>
-                                <form onSubmit={handleAuth} className="space-y-6">
-                                    <input type="password" placeholder="Mot de passe" className="w-full p-4 bg-stone-50 border rounded-2xl text-center font-bold tracking-widest outline-none focus:ring-2 focus:ring-[#D4AF37]" value={pass} onChange={e => setPass(e.target.value)} autoFocus />
-                                    {error && <p className="text-red-500 text-center text-[10px] font-black uppercase animate-shake">{error}</p>}
-                                    <button type="submit" className="w-full py-5 bg-[#06402B] text-[#D4AF37] font-black rounded-2xl shadow-xl uppercase tracking-widest text-xs">Déverrouiller</button>
-                                </form>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
 </body>
 </html>

@@ -71,6 +71,7 @@
         .modal-overlay {
             background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(12px);
+            touch-action: none; /* Empêche le scroll derrière sur mobile */
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -86,13 +87,22 @@
             color: white !important;
             transform: scale(1.1);
         }
+
+        /* Amélioration de la zone de clic pour mobile */
+        .mobile-touch-area {
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 <script type="importmap">
 {
   "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.0",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
@@ -117,7 +127,7 @@
                 <a href="#menu" class="text-[10px] font-bold tracking-widest uppercase text-white hover:text-[#D4AF37] transition-colors">Menu</a>
                 <a href="#contact" class="px-8 py-3 bg-[#D4AF37] text-white text-[10px] font-black uppercase rounded-full hover:bg-white hover:text-[#0B3022] transition-all shadow-lg">Réserver</a>
             </div>
-            <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+            <button class="md:hidden text-white mobile-touch-area" onclick="toggleMobileMenu()">
                 <i data-lucide="menu"></i>
             </button>
         </div>
@@ -137,13 +147,12 @@
             <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0B3022]/95"></div>
         </div>
         <div class="relative z-10 text-center px-4 max-w-4xl animate-fade-in-up">
-            <!-- Slogan principal légèrement réduit pour l'équilibre visuel -->
             <h1 class="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tighter">
                 S'asseoir comme <br><span class="text-[#D4AF37] italic font-normal">chez soi</span>
             </h1>
-            <!-- Sous-slogan rappetissé -->
-            <p class="text-base md:text-lg text-stone-200 mb-12 font-light max-w-2xl mx-auto leading-relaxed opacity-90">
-                L'authenticité de la gastronomie marocaine à Oujda. <br class="hidden md:block"> Une invitation au voyage sensoriel dans un cadre Beldi chic.
+            <!-- Slogan rappetissé pour plus de finesse -->
+            <p class="text-sm md:text-base text-stone-200 mb-12 font-light max-w-xl mx-auto leading-relaxed opacity-80 tracking-wide">
+                L'authenticité de la gastronomie marocaine à Oujda. <br class="hidden md:block"> Une escale sensorielle dans un cadre Beldi chic.
             </p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
                 <a href="#contact" class="px-12 py-5 bg-[#D4AF37] text-white font-black rounded-full uppercase text-[10px] shadow-2xl tracking-[0.2em] hover:scale-105 transition-all">Demander une table</a>
@@ -218,7 +227,7 @@
 
                 <!-- Fixe Cliquable -->
                 <a href="tel:+212536680010" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
-                    <div class="w-24 h-24 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#0B3022] mb-8 group-hover:scale-110 transition-transform">
+                    <div class="w-24 h-24 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#06402B] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="phone" size="48"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">Téléphone Fixe</h3>
@@ -295,11 +304,9 @@
                 <div class="space-y-6 flex flex-col items-center md:items-start">
                     <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Nous Suivre</h4>
                     <div class="flex gap-4">
-                        <!-- Instagram Cliquable -->
                         <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="social-btn w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white">
                             <i data-lucide="instagram" size="24"></i>
                         </a>
-                        <!-- Facebook Cliquable -->
                         <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="social-btn w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white">
                             <i data-lucide="facebook" size="24"></i>
                         </a>
@@ -323,13 +330,23 @@
         </div>
     </footer>
 
-    <!-- GALLERY MODAL -->
-    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4">
-        <button onclick="closeMenuGallery()" class="absolute top-10 right-10 text-white hover:text-[#D4AF37] transition-all transform hover:scale-110"><i data-lucide="x" size="56"></i></button>
-        <div class="relative w-full max-w-6xl h-[85vh] flex items-center justify-center">
-            <button onclick="prevGalleryImage()" class="absolute left-0 text-white hover:text-[#D4AF37] transition-all transform hover:scale-125 z-10 p-6"><i data-lucide="chevron-left" size="80"></i></button>
-            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm border-8 border-white/5" alt="Page du Menu">
-            <button onclick="nextGalleryImage()" class="absolute right-0 text-white hover:text-[#D4AF37] transition-all transform hover:scale-125 z-10 p-6"><i data-lucide="chevron-right" size="80"></i></button>
+    <!-- GALLERY MODAL CORRIGÉ -->
+    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4" onclick="handleBackdropClick(event)">
+        <!-- Croix de fermeture optimisée pour mobile -->
+        <button id="close-gallery-btn" class="absolute top-6 right-6 text-white hover:text-[#D4AF37] transition-all transform hover:scale-110 z-[110] mobile-touch-area" aria-label="Fermer la galerie">
+            <i data-lucide="x" size="48"></i>
+        </button>
+        
+        <div class="relative w-full max-w-6xl h-[75vh] md:h-[85vh] flex items-center justify-center pointer-events-none">
+            <button onclick="prevGalleryImage()" class="absolute left-0 text-white hover:text-[#D4AF37] transition-all transform hover:scale-125 z-10 p-6 pointer-events-auto mobile-touch-area" aria-label="Image précédente">
+                <i data-lucide="chevron-left" size="64"></i>
+            </button>
+            
+            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm border-8 border-white/5 pointer-events-auto" alt="Page du Menu">
+            
+            <button onclick="nextGalleryImage()" class="absolute right-0 text-white hover:text-[#D4AF37] transition-all transform hover:scale-125 z-10 p-6 pointer-events-auto mobile-touch-area" aria-label="Image suivante">
+                <i data-lucide="chevron-right" size="64"></i>
+            </button>
         </div>
         <p id="gallery-counter" class="text-[#D4AF37] font-black text-xs mt-12 tracking-[1.5em] uppercase opacity-70"></p>
     </div>
@@ -376,6 +393,15 @@
             renderCategories();
             renderMenuItems();
             checkNavbar();
+
+            // Attacher l'événement de fermeture de galerie de manière robuste
+            const closeBtn = document.getElementById('close-gallery-btn');
+            if(closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeMenuGallery();
+                });
+            }
         });
 
         window.addEventListener('scroll', checkNavbar);
@@ -412,10 +438,10 @@
             container.innerHTML = filtered.map(item => `
                 <div class="group border-b border-white/10 pb-10 transition-all duration-500">
                     <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-3xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors leading-tight">${item.name}</h3>
-                        <span class="text-[#D4AF37] font-serif font-bold text-2xl ml-4 shrink-0">${item.price}</span>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors leading-tight">${item.name}</h3>
+                        <span class="text-[#D4AF37] font-serif font-bold text-xl md:text-2xl ml-4 shrink-0">${item.price}</span>
                     </div>
-                    <p class="text-stone-500 italic font-light leading-relaxed text-lg">${item.description}</p>
+                    <p class="text-stone-500 italic font-light leading-relaxed text-base md:text-lg">${item.description}</p>
                 </div>
             `).join('');
         }
@@ -426,7 +452,7 @@
             renderMenuItems();
         }
 
-        // --- GALLERY MODAL LOGIC ---
+        // --- GALLERY MODAL LOGIC (FIXED FOR MOBILE) ---
         function openMenuGallery() {
             document.getElementById('gallery-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -436,6 +462,13 @@
         function closeMenuGallery() {
             document.getElementById('gallery-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
+        }
+
+        function handleBackdropClick(event) {
+            // Si on clique sur l'overlay (et pas sur l'image elle-même), on ferme
+            if (event.target.id === 'gallery-modal') {
+                closeMenuGallery();
+            }
         }
 
         function updateGalleryImage() {
@@ -453,7 +486,7 @@
             updateGalleryImage();
         }
 
-        // Keyboard navigation
+        // Navigation clavier
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('gallery-modal').classList.contains('hidden')) return;
             if (e.key === 'ArrowRight') nextGalleryImage();

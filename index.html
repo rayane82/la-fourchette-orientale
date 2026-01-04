@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Fourchette Orientale | Gastronomie 100% Beldi Oujda</title>
+    <title>La Fourchette Orientale | Gastronomie Traditionnelle Oujda</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230B3022'/%3E%3Cpath d='M50 20 L55 40 L75 40 L60 55 L65 75 L50 60 L35 75 L40 55 L25 40 L45 40 Z' fill='%23D4AF37'/%3E%3C/svg%3E">
@@ -38,7 +38,7 @@
             font-family: 'Playfair Display', serif; 
         }
 
-        .bg-zellige { 
+        .bg-zedge { 
             background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png'); 
         }
         
@@ -97,7 +97,6 @@
             cursor: pointer;
         }
         
-        /* Fix pour la croix sur mobile */
         #close-gallery-btn {
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
@@ -106,11 +105,11 @@
 <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "vite": "https://esm.sh/vite@^7.3.0"
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
@@ -138,7 +137,6 @@
                 <i data-lucide="menu"></i>
             </button>
         </div>
-        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#0B3022] py-12 flex flex-col items-center space-y-8 shadow-2xl border-t border-white/10 animate-fade-in-up">
             <a href="#accueil" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Accueil</a>
             <a href="#about" class="text-white font-serif text-3xl" onclick="toggleMobileMenu()">Tradition</a>
@@ -151,30 +149,29 @@
     <!-- HERO SECTION -->
     <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0 animate-slow-zoom">
-            <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" class="w-full h-full object-cover" alt="Ambiance Beldi">
+            <img src="https://i.postimg.cc/vHdB2JV4/unnamed-(11)-Photoroom.png" class="w-full h-full object-cover" alt="Ambiance Authentique">
             <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0B3022]/95"></div>
         </div>
         <div class="relative z-10 text-center px-4 max-w-4xl animate-fade-in-up">
             <h1 class="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tighter">
                 S'asseoir comme <br><span class="text-[#D4AF37] italic font-normal">chez soi</span>
             </h1>
-            <!-- Slogan rappetissé et épuré -->
             <p class="text-sm md:text-base text-stone-200 mb-12 font-light max-w-xl mx-auto leading-relaxed opacity-80 tracking-wide uppercase">
                 Gastronomie 100% Beldi à Oujda. <br class="hidden md:block"> Le goût authentique de nos racines.
             </p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
                 <a href="#contact" class="px-12 py-5 bg-[#D4AF37] text-white font-black rounded-full uppercase text-[10px] shadow-2xl tracking-[0.2em] hover:scale-105 transition-all">Réserver une table</a>
-                <a href="#menu" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-[10px] backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-[0.2em]">La Carte Beldi</a>
+                <a href="#menu" class="px-12 py-5 border border-white/30 text-white font-bold rounded-full uppercase text-[10px] backdrop-blur-md hover:bg-white hover:text-[#0B3022] transition-all tracking-[0.2em]">La Carte</a>
             </div>
         </div>
     </section>
 
     <!-- ABOUT SECTION -->
     <section id="about" class="py-32 bg-white relative">
-        <div class="absolute inset-0 bg-zellige opacity-5"></div>
+        <div class="absolute inset-0 bg-zedge opacity-5"></div>
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div class="relative aspect-[4/5] bg-stone-50 p-4 rounded-[3.5rem] shadow-2xl overflow-hidden group">
-                <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" class="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover:scale-105" alt="L'art Beldi">
+                <img src="https://i.postimg.cc/HszjRSHg/images-(2).png" class="w-full h-full object-cover rounded-[2.8rem] transition-transform duration-1000 group-hover:scale-105" alt="Tradition locale">
             </div>
             <div class="space-y-10 text-center lg:text-left">
                 <span class="inline-block px-8 py-3 bg-[#0B3022]/5 border-2 border-[#D4AF37] text-[#0B3022] text-[10px] font-black uppercase rounded-full tracking-[0.4em]">Héritage d'Oujda</span>
@@ -183,15 +180,15 @@
                     Ici, on ne mange pas, on est reçu. Dans la pure tradition oujdie, La Fourchette Orientale perpétue les gestes d'autrefois pour vous offrir un moment de partage vrai, loin des artifices.
                 </p>
                 <div class="p-12 bg-[#0B3022] rounded-[3rem] text-white border-r-[12px] border-[#D4AF37] shadow-2xl italic font-serif text-2xl relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-zellige opacity-5"></div>
+                    <div class="absolute inset-0 bg-zedge opacity-5"></div>
                     <i data-lucide="quote" class="absolute top-4 right-6 text-white/10" size="80"></i>
-                    <p class="relative z-10 leading-relaxed text-center">"La générosité du Beldi, la sincérité de l'accueil."</p>
+                    <p class="relative z-10 leading-relaxed text-center">"La générosité du partage, la sincérité de l'accueil."</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES SECTION (NEW) -->
+    <!-- SERVICES SECTION -->
     <section id="services" class="py-24 bg-[#0B3022]/5 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
@@ -199,26 +196,23 @@
                 <div class="w-24 h-1 bg-[#D4AF37] mx-auto mt-6"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Retrait Restaurant -->
                 <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
                         <i data-lucide="shopping-bag" size="40"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Retrait en Resto</h3>
-                    <p class="text-stone-500 text-sm leading-relaxed">Commandez vos plats Beldi préférés et récupérez-les directement au restaurant.</p>
+                    <p class="text-stone-500 text-sm leading-relaxed">Commandez vos plats traditionnels préférés et récupérez-les directement au restaurant.</p>
                 </div>
-                <!-- Livraison -->
                 <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
                         <i data-lucide="truck" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Livraison Beldi</h3>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Livraison à domicile</h3>
                     <p class="text-stone-500 text-sm leading-relaxed">La tradition s'invite chez vous. Nous livrons partout à Oujda avec soin et rapidité.</p>
                 </div>
-                <!-- Sur Place -->
                 <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
-                        <i data-lucide="utensils-crossear" size="40"></i>
+                        <i data-lucide="utensils" size="40"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Sur Place</h3>
                     <p class="text-stone-500 text-sm leading-relaxed">Vivez l'expérience complète dans notre salon traditionnel au cœur d'Oujda.</p>
@@ -230,7 +224,7 @@
     <!-- MENU SECTION -->
     <section id="menu" class="py-32 bg-[#140804] text-white relative">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-5xl md:text-8xl font-serif font-bold mb-16">Carte <span class="text-[#D4AF37] italic">Beldi</span></h2>
+            <h2 class="text-5xl md:text-8xl font-serif font-bold mb-16">Notre <span class="text-[#D4AF37] italic">Carte</span></h2>
             
             <div class="flex flex-wrap justify-center gap-4 mb-20" id="menu-categories">
                 <!-- JS Inject -->
@@ -241,7 +235,7 @@
             </div>
 
             <button onclick="openMenuGallery()" class="mt-24 px-16 py-6 border border-[#D4AF37]/50 text-[#D4AF37] rounded-full font-black text-[10px] uppercase tracking-[0.5em] hover:bg-[#D4AF37] hover:text-white transition-all shadow-2xl">
-                <i data-lucide="zoom-in" class="inline-block mr-3" size="18"></i> Voir le Menu HD
+                <i data-lucide="zoom-in" class="inline-block mr-3" size="18"></i> Voir le Menu Complet HD
             </button>
         </div>
     </section>
@@ -249,10 +243,9 @@
     <!-- CONTACT SECTION -->
     <section id="contact" class="py-32 bg-[#F9F7F2] relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
-            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24">Réserver <span class="text-[#D4AF37] italic">Beldi</span></h2>
+            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24">Réserver une <span class="text-[#D4AF37] italic">table</span></h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto mb-24">
-                <!-- WhatsApp Cliquable -->
                 <a href="https://wa.me/212770454031" target="_blank" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
                     <div class="w-24 h-24 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="message-circle" size="48"></i>
@@ -262,7 +255,6 @@
                     <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Réserver par Message</span>
                 </a>
 
-                <!-- Fixe Cliquable -->
                 <a href="tel:+212536680010" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
                     <div class="w-24 h-24 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#0B3022] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="phone" size="48"></i>
@@ -272,7 +264,6 @@
                     <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Appeler Directement</span>
                 </a>
 
-                <!-- Email Direct cliquable -->
                 <a href="mailto:fourchetteorientale.ma@gmail.com" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
                     <div class="w-24 h-24 bg-[#8E3A1F]/10 rounded-full flex items-center justify-center text-[#8E3A1F] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="mail" size="48"></i>
@@ -287,20 +278,18 @@
 
     <!-- FOOTER -->
     <footer class="bg-[#0B3022] pt-24 pb-12 text-white relative overflow-hidden border-t border-[#D4AF37]/20">
-        <div class="absolute inset-0 bg-zellige opacity-5 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-zedge opacity-5 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
                 
-                <!-- Brand & Logo -->
                 <div class="flex flex-col items-center md:items-start text-center md:text-left">
                     <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-24 w-24 rounded-full mb-8 border-2 border-[#D4AF37] shadow-2xl">
                     <h3 class="text-2xl font-serif font-bold tracking-widest mb-4">LA FOURCHETTE ORIENTALE</h3>
                     <p class="text-stone-400 text-sm leading-relaxed max-w-xs uppercase">
-                        Gastronomie 100% Beldi à Oujda. Comme à la maison.
+                        Gastronomie Traditionnelle à Oujda. Comme à la maison.
                     </p>
                 </div>
 
-                <!-- Coordonnées -->
                 <div class="space-y-6 flex flex-col items-center md:items-start">
                     <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Contact</h4>
                     <div class="space-y-4">
@@ -319,7 +308,6 @@
                     </div>
                 </div>
 
-                <!-- Heures & Localisation -->
                 <div class="space-y-6 flex flex-col items-center md:items-start">
                     <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Horaires & Lieu</h4>
                     <div class="space-y-4">
@@ -337,15 +325,12 @@
                     </div>
                 </div>
 
-                <!-- Réseaux Sociaux -->
                 <div class="space-y-6 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Suivez la Tradition</h4>
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Suivez-nous</h4>
                     <div class="flex gap-4">
-                        <!-- Instagram Cliquable -->
                         <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
                             <i data-lucide="instagram" size="24"></i>
                         </a>
-                        <!-- Facebook Cliquable -->
                         <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
                             <i data-lucide="facebook" size="24"></i>
                         </a>
@@ -354,27 +339,24 @@
             </div>
 
             <div class="pt-12 border-t border-white/5 text-center">
-                <p class="text-white/20 text-[9px] uppercase tracking-[0.6em]">© 2025 LA FOURCHETTE ORIENTALE - TOUS DROITS RÉSERVÉS - GASTRONOMIE 100% BELDI</p>
+                <p class="text-white/20 text-[9px] uppercase tracking-[0.6em]">© 2025 LA FOURCHETTE ORIENTALE - TOUS DROITS RÉSERVÉS</p>
             </div>
         </div>
     </footer>
 
-    <!-- GALLERY MODAL (REINFORCED FOR MOBILE) -->
+    <!-- GALLERY MODAL -->
     <div id="gallery-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex flex-col items-center justify-center p-4" onclick="handleBackdropClick(event)">
-        <!-- Croix de fermeture fixe et bien visible -->
         <button id="close-gallery-btn" class="absolute top-6 right-6 text-white hover:text-[#D4AF37] transition-all transform active:scale-90 z-[120] mobile-touch-area" aria-label="Fermer la galerie">
             <i data-lucide="x" size="48"></i>
         </button>
         
         <div class="relative w-full max-w-6xl h-[70vh] md:h-[85vh] flex items-center justify-center">
-            <!-- Précédent -->
             <button onclick="prevGalleryImage()" class="absolute left-0 md:left-4 text-white/50 hover:text-[#D4AF37] transition-all transform active:scale-90 z-[110] p-6 mobile-touch-area" aria-label="Précédent">
                 <i data-lucide="chevron-left" size="64"></i>
             </button>
             
-            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm border-4 border-white/10" alt="Page Menu Beldi">
+            <img id="gallery-image" class="max-h-full max-w-full object-contain shadow-2xl rounded-sm border-4 border-white/10" alt="Planche Menu">
             
-            <!-- Suivant -->
             <button onclick="nextGalleryImage()" class="absolute right-0 md:right-4 text-white/50 hover:text-[#D4AF37] transition-all transform active:scale-90 z-[110] p-6 mobile-touch-area" aria-label="Suivant">
                 <i data-lucide="chevron-right" size="64"></i>
             </button>
@@ -382,19 +364,17 @@
         <p id="gallery-counter" class="text-[#D4AF37] font-black text-xs mt-12 tracking-[1.5em] uppercase opacity-70"></p>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
-        // --- DONNÉES MENU ---
         const MENU_ITEMS = [
-            { id: '1', category: 'Petit-déjeuner Beldi', name: 'Ftour Al-Fourchette', description: 'Msemmen ou Beghrir, Beurre de ferme, Miel pur, Fromage Beldi, Oeufs, Jus d\'Orange, Thé ou Café.', price: '55 DH' },
-            { id: '2', category: 'Petit-déjeuner Beldi', name: 'Ftour Beldi Tradition', description: 'Beurre, Miel, Huile d\'olive extra vierge, Amlou, Fromage, Pain Beldi chaud, Thé.', price: '38 DH' },
+            { id: '1', category: 'Petit-déjeuner', name: 'Ftour Al-Fourchette', description: 'Msemmen ou Beghrir, Beurre de ferme, Miel pur, Fromage Traditionnel, Oeufs, Jus d\'Orange, Thé ou Café.', price: '55 DH' },
+            { id: '2', category: 'Petit-déjeuner', name: 'Ftour Tradition', description: 'Beurre, Miel, Huile d\'olive extra vierge, Amlou, Fromage, Pain Beldi chaud, Thé.', price: '38 DH' },
             { id: '3', category: 'Salades & Entrées', name: 'Zaalouk Oujdi', description: 'Aubergines fumées au feu de bois et tomates aux épices ancestrales.', price: '18 DH' },
             { id: '4', category: 'Salades & Entrées', name: 'Salade Marocaine Pure', description: 'Tomates fraîches, oignons, poivrons verts et persil haché.', price: '18 DH' },
-            { id: '5', category: 'Nos Tajines Beldi', name: 'Tajine Viande aux Pruneaux', description: 'Viande de veau fondante, pruneaux caramélisés et amandes croquantes.', price: '65 DH' },
-            { id: '6', category: 'Nos Tajines Beldi', name: 'Couscous Beldi (Vendredi)', description: 'Semoule fine à la vapeur, sept légumes frais, viande tendre et tfaya maison.', price: '70 DH' },
-            { id: '7', category: 'Grillades Beldi', name: 'Kefta Traditionnelle', description: 'Kefta de bœuf hachée minute, grillée au charbon, frites et salade.', price: '45 DH' },
-            { id: '8', category: 'Grillades Beldi', name: 'Brochettes de Poulet Beldi', description: 'Poulet fermier mariné au safran et herbes fraîches.', price: '42 DH' },
-            { id: '9', category: 'Desserts & Fruits', name: 'Jus d\'Avocat Beldi', description: 'Avocat onctueux, mélange généreux de fruits secs et miel.', price: '30 DH' },
+            { id: '5', category: 'Nos Tajines', name: 'Tajine Viande aux Pruneaux', description: 'Viande de veau fondante, pruneaux caramélisés et amandes croquantes.', price: '65 DH' },
+            { id: '6', category: 'Nos Tajines', name: 'Couscous Traditionnel (Vendredi)', description: 'Semoule fine à la vapeur, sept légumes frais, viande tendre et tfaya maison.', price: '70 DH' },
+            { id: '7', category: 'Grillades', name: 'Kefta Traditionnelle', description: 'Kefta de bœuf hachée minute, grillée au charbon, frites et salade.', price: '45 DH' },
+            { id: '8', category: 'Grillades', name: 'Brochettes de Poulet', description: 'Poulet fermier mariné au safran et herbes fraîches.', price: '42 DH' },
+            { id: '9', category: 'Desserts & Fruits', name: 'Jus d\'Avocat', description: 'Avocat onctueux, mélange généreux de fruits secs et miel.', price: '30 DH' },
             { id: '10', category: 'Desserts & Fruits', name: 'Salade de Fruits Frais', description: 'Fruits de saison cueillis à maturité, coupés minute.', price: '25 DH' }
         ];
 
@@ -415,17 +395,15 @@
             "https://i.postimg.cc/wxGyWRjm/2025-10-09-(23).jpg"
         ];
 
-        let activeCategory = 'Nos Tajines Beldi';
+        let activeCategory = 'Nos Tajines';
         let currentImgIndex = 0;
 
-        // --- INITIALISATION ---
         window.addEventListener('load', () => {
             lucide.createIcons();
             renderCategories();
             renderMenuItems();
             checkNavbar();
 
-            // Attachement manuel pour garantir le fonctionnement mobile
             const closeBtn = document.getElementById('close-gallery-btn');
             if(closeBtn) {
                 closeBtn.onclick = (e) => {
@@ -453,7 +431,6 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // --- GESTION MENU ---
         function renderCategories() {
             const container = document.getElementById('menu-categories');
             const cats = [...new Set(MENU_ITEMS.map(i => i.category))];
@@ -484,21 +461,19 @@
             renderMenuItems();
         }
 
-        // --- GALERIE PHOTO (CORRIGÉ MOBILE) ---
         function openMenuGallery() {
             document.getElementById('gallery-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop scroll
+            document.body.style.overflow = 'hidden';
             updateGalleryImage();
         }
 
         function closeMenuGallery() {
             const modal = document.getElementById('gallery-modal');
             modal.classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Reprise scroll
+            document.body.style.overflow = 'auto';
         }
 
         function handleBackdropClick(event) {
-            // Fermeture si clic en dehors de l'image
             if (event.target.id === 'gallery-modal') {
                 closeMenuGallery();
             }
@@ -520,7 +495,6 @@
             updateGalleryImage();
         }
 
-        // Support clavier
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('gallery-modal').classList.contains('hidden')) return;
             if (e.key === 'ArrowRight') nextGalleryImage();

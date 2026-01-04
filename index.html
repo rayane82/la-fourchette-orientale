@@ -114,16 +114,16 @@
 }
 </script>
 </head>
-<body class="selection:bg-[#D4AF37] selection:text-white">
+<body class="selection:bg-[#D4AF37] selection:text-white text-[#0B3022]">
 
     <!-- NAVIGATION -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex items-center gap-4 cursor-pointer group">
-                <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-14 w-14 rounded-full border-2 border-[#D4AF37] shadow-lg transition-transform group-hover:rotate-6">
+                <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-12 w-12 md:h-14 md:w-14 rounded-full border-2 border-[#D4AF37] shadow-lg transition-transform group-hover:rotate-6">
                 <div class="flex flex-col text-white">
-                    <span class="text-xl font-serif font-bold tracking-widest leading-none">LA FOURCHETTE</span>
-                    <span class="text-[10px] tracking-[0.3em] font-light text-[#D4AF37]">ORIENTALE</span>
+                    <span class="text-lg md:text-xl font-serif font-bold tracking-widest leading-none">LA FOURCHETTE</span>
+                    <span class="text-[9px] md:text-[10px] tracking-[0.3em] font-light text-[#D4AF37]">ORIENTALE</span>
                 </div>
             </div>
             <div class="hidden md:flex items-center space-x-10">
@@ -182,7 +182,7 @@
                 <div class="p-12 bg-[#0B3022] rounded-[3rem] text-white border-r-[12px] border-[#D4AF37] shadow-2xl italic font-serif text-2xl relative overflow-hidden group">
                     <div class="absolute inset-0 bg-zedge opacity-5"></div>
                     <i data-lucide="quote" class="absolute top-4 right-6 text-white/10" size="80"></i>
-                    <p class="relative z-10 leading-relaxed text-center">"La générosité du partage, la sincérité de l'accueil."</p>
+                    <p class="relative z-10 leading-relaxed text-center text-white">"La générosité du partage, la sincérité de l'accueil."</p>
                 </div>
             </div>
         </div>
@@ -200,21 +200,21 @@
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
                         <i data-lucide="shopping-bag" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Retrait en Resto</h3>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Retrait en Resto</h3>
                     <p class="text-stone-500 text-sm leading-relaxed">Commandez vos plats traditionnels préférés et récupérez-les directement au restaurant.</p>
                 </div>
                 <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
                         <i data-lucide="truck" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Livraison à domicile</h3>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Livraison à domicile</h3>
                     <p class="text-stone-500 text-sm leading-relaxed">La tradition s'invite chez vous. Nous livrons partout à Oujda avec soin et rapidité.</p>
                 </div>
                 <div class="service-card bg-white p-12 rounded-[3rem] text-center shadow-xl border border-stone-100 flex flex-col items-center">
                     <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center text-[#D4AF37] mb-8">
                         <i data-lucide="utensils" size="40"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Sur Place</h3>
+                    <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter text-[#0B3022]">Sur Place</h3>
                     <p class="text-stone-500 text-sm leading-relaxed">Vivez l'expérience complète dans notre salon traditionnel au cœur d'Oujda.</p>
                 </div>
             </div>
@@ -240,106 +240,114 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <!-- CONTACT SECTION (MODIFIED: NO EMAIL) -->
     <section id="contact" class="py-32 bg-[#F9F7F2] relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
-            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24">Réserver une <span class="text-[#D4AF37] italic">table</span></h2>
+            <h2 class="text-5xl md:text-8xl font-serif font-bold text-[#0B3022] mb-24 text-center">Réserver une <span class="text-[#D4AF37] italic">table</span></h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto mb-24">
+            <!-- Grid adjusted for 2 centered cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto mb-24">
+                <!-- WhatsApp -->
                 <a href="https://wa.me/212770454031" target="_blank" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
                     <div class="w-24 h-24 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="message-circle" size="48"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">WhatsApp</h3>
-                    <p class="text-stone-400 mb-8 font-medium italic">0770-454031</p>
+                    <p class="text-stone-400 mb-8 font-medium italic text-sm">0770-454031</p>
                     <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Réserver par Message</span>
                 </a>
 
+                <!-- Téléphone -->
                 <a href="tel:+212536680010" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
                     <div class="w-24 h-24 bg-[#0B3022]/10 rounded-full flex items-center justify-center text-[#0B3022] mb-8 group-hover:scale-110 transition-transform">
                         <i data-lucide="phone" size="48"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">Téléphone</h3>
-                    <p class="text-stone-400 mb-8 font-medium italic">0536-680010</p>
-                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Appeler Directement</span>
-                </a>
-
-                <a href="mailto:fourchetteorientale.ma@gmail.com" class="contact-card flex flex-col items-center p-14 bg-white rounded-[3.5rem] shadow-2xl transition-all border-b-8 border-[#D4AF37] group">
-                    <div class="w-24 h-24 bg-[#8E3A1F]/10 rounded-full flex items-center justify-center text-[#8E3A1F] mb-8 group-hover:scale-110 transition-transform">
-                        <i data-lucide="mail" size="48"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-[#0B3022] mb-3 uppercase tracking-tighter">E-mail</h3>
-                    <p class="text-stone-400 mb-8 font-medium italic truncate w-full text-center">fourchetteorientale.ma@gmail.com</p>
-                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">Nous Écrire</span>
+                    <p class="text-stone-400 mb-8 font-medium italic text-sm">0536-680010</p>
+                    <span class="px-10 py-4 bg-[#0B3022] text-[#D4AF37] font-black rounded-full uppercase text-[10px] tracking-widest group-hover:bg-[#D4AF37] group-hover:text-white transition-colors text-center">Appeler Directement</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#0B3022] pt-24 pb-12 text-white relative overflow-hidden border-t border-[#D4AF37]/20">
+    <!-- FOOTER (CONSERVE L'EMAIL ICI) -->
+    <footer class="bg-[#0B3022] pt-12 pb-6 text-white relative overflow-hidden border-t border-[#D4AF37]/20">
         <div class="absolute inset-0 bg-zedge opacity-5 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
                 
+                <!-- Brand & Logo -->
                 <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-24 w-24 rounded-full mb-8 border-2 border-[#D4AF37] shadow-2xl">
-                    <h3 class="text-2xl font-serif font-bold tracking-widest mb-4">LA FOURCHETTE ORIENTALE</h3>
-                    <p class="text-stone-400 text-sm leading-relaxed max-w-xs uppercase">
-                        Gastronomie Traditionnelle à Oujda. Comme à la maison.
+                    <img src="https://i.postimg.cc/Wpw7D39h/602818834-18089739302297337-6789941149446710277-n.jpg" class="h-16 w-16 rounded-full mb-6 border-2 border-[#D4AF37] shadow-xl">
+                    <h3 class="text-lg font-serif font-bold tracking-widest mb-3 uppercase">LA FOURCHETTE ORIENTALE</h3>
+                    <p class="text-stone-400 text-[10px] leading-relaxed max-w-xs uppercase font-medium">
+                        Gastronomie Traditionnelle à Oujda. <br>L'accueil, tout simplement.
                     </p>
                 </div>
 
-                <div class="space-y-6 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Contact</h4>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4 group">
-                            <i data-lucide="message-circle" class="text-[#D4AF37]" size="20"></i>
-                            <a href="https://wa.me/212770454031" target="_blank" class="text-stone-300 hover:text-[#D4AF37] transition-colors font-medium">0770-454031 (WhatsApp)</a>
+                <!-- Contact Rapide -->
+                <div class="space-y-4 flex flex-col items-center md:items-start">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left">Contact</h4>
+                    <div class="space-y-2">
+                        <a href="https://wa.me/212770454031" target="_blank" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
+                            <i data-lucide="message-circle" class="text-[#D4AF37]" size="16"></i>
+                            <span class="text-xs font-medium italic">0770-454031</span>
+                        </a>
+                        <a href="tel:+212536680010" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
+                            <i data-lucide="phone" class="text-[#D4AF37]" size="16"></i>
+                            <span class="text-xs font-medium italic">0536-680010</span>
+                        </a>
+                        <a href="mailto:fourchetteorientale.ma@gmail.com" class="flex items-center gap-3 group text-stone-300 hover:text-[#D4AF37] transition-colors">
+                            <i data-lucide="mail" class="text-[#D4AF37]" size="16"></i>
+                            <span class="text-[10px] font-medium break-all">fourchetteorientale.ma@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Localisation -->
+                <div class="space-y-4 flex flex-col items-center md:items-start">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left">Lieu</h4>
+                    <div class="space-y-3 w-full">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="text-[#D4AF37] mt-1 shrink-0" size="16"></i>
+                            <p class="text-stone-300 text-[10px] leading-relaxed uppercase font-medium">
+                                Boulevard Mohammed Derfoufi,<br>
+                                60000 Oujda, Maroc
+                            </p>
                         </div>
-                        <div class="flex items-center gap-4 group">
-                            <i data-lucide="phone" class="text-[#D4AF37]" size="20"></i>
-                            <a href="tel:+212536680010" class="text-stone-300 hover:text-[#D4AF37] transition-colors font-medium">0536-680010 (Fixe)</a>
-                        </div>
-                        <div class="flex items-center gap-4 group">
-                            <i data-lucide="mail" class="text-[#D4AF37]" size="20"></i>
-                            <a href="mailto:fourchetteorientale.ma@gmail.com" class="text-stone-300 hover:text-[#D4AF37] transition-colors text-[10px] font-medium italic">fourchetteorientale.ma@gmail.com</a>
+                        <div class="h-32 w-full rounded-xl overflow-hidden border border-white/10 shadow-lg grayscale-[0.5] hover:grayscale-0 transition-all duration-500">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.935057632164!2d-1.9214227251546938!3d34.681588484239576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd78650061ca7b8d%3A0xc6700e4e9b03f8ac!2sFourchette%20orientale!5e0!3m2!1sfr!2sma!4v1767469064092!5m2!1sfr!2sma" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
                         </div>
                     </div>
                 </div>
 
-                <div class="space-y-6 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Horaires & Lieu</h4>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <i data-lucide="map-pin" class="text-[#D4AF37] mt-1" size="20"></i>
-                            <p class="text-stone-300">Boulevard Mohammed Derfoufi,<br>60000 Oujda, Maroc</p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <i data-lucide="clock" class="text-[#D4AF37] mt-1" size="20"></i>
-                            <div>
-                                <p class="text-stone-300">Lun - Sam : 10h00 - 17h00</p>
-                                <p class="text-[#8E3A1F] font-bold italic mt-1 uppercase text-[10px] tracking-widest">Dimanche : Fermé</p>
-                            </div>
-                        </div>
+                <!-- Réseaux & CTA -->
+                <div class="space-y-4 flex flex-col items-center md:items-start">
+                    <h4 class="text-[#D4AF37] font-black uppercase text-[9px] tracking-[0.4em] border-b border-white/10 pb-1 w-full text-center md:text-left uppercase">Suivez-nous</h4>
+                    <div class="flex gap-3 mb-4">
+                        <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
+                            <i data-lucide="instagram" size="18"></i>
+                        </a>
+                        <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
+                            <i data-lucide="facebook" size="18"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="space-y-6 flex flex-col items-center md:items-start">
-                    <h4 class="text-[#D4AF37] font-black uppercase text-[10px] tracking-[0.4em] border-b border-white/10 pb-2 w-full text-center md:text-left">Suivez-nous</h4>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/fourchetteorientale.ma/" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
-                            <i data-lucide="instagram" size="24"></i>
-                        </a>
-                        <a href="https://www.facebook.com/fourchetteorientale.ma/" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center transition-all border border-white/10 text-stone-300 hover:text-white hover:bg-[#D4AF37]">
-                            <i data-lucide="facebook" size="24"></i>
-                        </a>
+                    <div class="flex items-center gap-2 text-stone-300">
+                        <i data-lucide="clock" class="text-[#D4AF37]" size="14"></i>
+                        <span class="text-[9px] uppercase font-bold tracking-widest">10h - 17h (Lun-Sam)</span>
                     </div>
                 </div>
             </div>
 
-            <div class="pt-12 border-t border-white/5 text-center">
-                <p class="text-white/20 text-[9px] uppercase tracking-[0.6em]">© 2025 LA FOURCHETTE ORIENTALE - TOUS DROITS RÉSERVÉS</p>
+            <div class="pt-6 border-t border-white/5 text-center">
+                <p class="text-white/20 text-[8px] uppercase tracking-[0.5em] font-black italic">© 2025 LA FOURCHETTE ORIENTALE - TRADITION OUJDIE</p>
             </div>
         </div>
     </footer>
@@ -361,7 +369,7 @@
                 <i data-lucide="chevron-right" size="64"></i>
             </button>
         </div>
-        <p id="gallery-counter" class="text-[#D4AF37] font-black text-xs mt-12 tracking-[1.5em] uppercase opacity-70"></p>
+        <p id="gallery-counter" class="text-[#D4AF37] font-black text-xs mt-12 tracking-[1.5em] uppercase opacity-70 text-center"></p>
     </div>
 
     <script>
@@ -435,7 +443,7 @@
             const container = document.getElementById('menu-categories');
             const cats = [...new Set(MENU_ITEMS.map(i => i.category))];
             container.innerHTML = cats.map(cat => `
-                <button onclick="setCategory('${cat}')" class="px-8 py-4 text-[11px] font-black uppercase tracking-[0.4em] rounded-2xl transition-all border border-white/10 ${activeCategory === cat ? 'menu-tab-active' : 'bg-white/5 text-white/40 hover:bg-white/10'}">
+                <button onclick="setCategory('${cat}')" class="px-6 md:px-8 py-3 md:py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] rounded-2xl transition-all border border-white/10 ${activeCategory === cat ? 'menu-tab-active' : 'bg-white/5 text-white/40 hover:bg-white/10'}">
                     ${cat}
                 </button>
             `).join('');
@@ -445,9 +453,9 @@
             const container = document.getElementById('menu-items-grid');
             const filtered = MENU_ITEMS.filter(i => i.category === activeCategory);
             container.innerHTML = filtered.map(item => `
-                <div class="group border-b border-white/10 pb-10 transition-all duration-500">
+                <div class="group border-b border-stone-200 pb-10 transition-all duration-500">
                     <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors leading-tight uppercase">${item.name}</h3>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold group-hover:text-[#D4AF37] transition-colors leading-tight uppercase text-[#0B3022]">${item.name}</h3>
                         <span class="text-[#D4AF37] font-serif font-bold text-xl md:text-2xl ml-4 shrink-0">${item.price}</span>
                     </div>
                     <p class="text-stone-500 italic font-light leading-relaxed text-base md:text-lg">${item.description}</p>
